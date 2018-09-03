@@ -13,7 +13,7 @@ class VideoChat : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video_chat)
+        setContentView(R.layout.activity_main)
 
         PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions.builder(this).createInitializationOptions())
         val peerConnectionFactory = PeerConnectionFactory.builder().createPeerConnectionFactory()
