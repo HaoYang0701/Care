@@ -1,0 +1,17 @@
+9/2/18
+
+9am - 9:30AM : Took a look at diff libraries - twilio, webrtc.
+WebRTC is Chrome + Android + Firefox + Opera + Java & Obj-C binding
+
+
+6pm - 10pm
+
+https://www.youtube.com/watch?v=p2HzZkd2A40
+
+Create and initialize PeerConnectionFactory
+Create a VideoCapturer instance which uses the camera of the device
+Create a VideoSource from the Capturer
+Create a VideoTrack from the source
+Create a video renderer using a SurfaceViewRenderer view and add it to the VideoTrack instance
+
+NATs block the UDP/TCP audio/video streams. This is why we need a STUN server to expose the public ip
