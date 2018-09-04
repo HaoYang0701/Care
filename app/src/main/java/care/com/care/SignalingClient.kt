@@ -72,7 +72,7 @@ internal class SignalingClient {
                 sslContext.init(null, trustAllCerts, null)
                 IO.setDefaultHostnameVerifier{_,_ -> true}
                 IO.setDefaultSSLContext(sslContext)
-                socket  = IO.socket("your_socket_io")
+                socket  = IO.socket("http://10.71.15.205:1794/")
                 socket?.connect()
 
                 roomName?.let { emitInitStatement(it)}

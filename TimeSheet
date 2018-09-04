@@ -15,3 +15,14 @@ Create a VideoTrack from the source
 Create a video renderer using a SurfaceViewRenderer view and add it to the VideoTrack instance
 
 NATs block the UDP/TCP audio/video streams. This is why we need a STUN server to expose the public ip
+
+
+
+9/3
+
+4pm - 7:42pm
+Alternative in case this does not work .  Videochatguru
+
+Did the node js portion
+
+req -x509 -newkey rsa:4096 -sha256 -nodes -keyout key.pem -out cert.pem -subj "/CN=localhost" -days 3650
