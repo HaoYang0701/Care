@@ -41,7 +41,7 @@ internal class SignalingClient {
 
         init {
             if (roomName == null) {
-                roomName = "some_room_name"
+                roomName = "a"
             }
         }
 
@@ -72,7 +72,7 @@ internal class SignalingClient {
                 sslContext.init(null, trustAllCerts, null)
                 IO.setDefaultHostnameVerifier{_,_ -> true}
                 IO.setDefaultSSLContext(sslContext)
-                socket  = IO.socket("http://10.71.15.205:1794/")
+                socket  = IO.socket("https://hidden-hollows-28924.herokuapp.com/")
                 socket?.connect()
 
                 roomName?.let { emitInitStatement(it)}
