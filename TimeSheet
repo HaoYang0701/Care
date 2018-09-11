@@ -35,6 +35,8 @@ Node js hosting to see if this works
 https://hidden-hollows-28924.herokuapp.com/
 
 9/10 
-6:30pm - 10pm
+6:30pm - 11pm
 
 Ran through quick twilio tut to implement their SDK
+Implemented SDK
+Figured out the API keys, account sid, secret key and how to get access tokens (this might need to go on the server in the future)
