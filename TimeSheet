@@ -33,3 +33,8 @@ req -x509 -newkey rsa:4096 -sha256 -nodes -keyout key.pem -out cert.pem -subj "/
 5:30 - 7:50pm
 Node js hosting to see if this works
 https://hidden-hollows-28924.herokuapp.com/
+
+9/10 
+6:30pm - 10pm
+
+Ran through quick twilio tut to implement their SDK
