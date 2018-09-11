@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:tools="http://schemas.android.com/tools"
-                 android:id="@+id/activity_main"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:layout_weight="1"
-                 android:orientation="vertical"
-                 tools:context="xyz.vivekc.webrtccodelab.MainActivity">
-
-
-        <org.webrtc.SurfaceViewRenderer
-            android:id="@+id/remote_gl_surface_view"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:layout_height="match_parent" />
-
-        <org.webrtc.SurfaceViewRenderer
-            android:id="@+id/local_gl_surface_view"
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom|end"
-            android:layout_height="match_parent" />
-
-
-
-    </FrameLayout>
-
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/end_call"
-            android:text="Hangup" />
-    </LinearLayout>
-</FrameLayout>
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_main"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_call"
+        app:backgroundTint="@color/colorPrimary"/>
+
+</LinearLayout>

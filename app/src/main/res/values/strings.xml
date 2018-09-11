@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Care</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="permissions_needed">Permission Needed</string>
+    <string name="turn_speaker_on"></string>
+    <string name="settings"></string>
+    <string name="room_status"></string>
+
+
+    <string name="pref_title_audio_codec"></string>
+    <string name="codec_title"></string>
+    <string name="pref_title_video_codec"></string>
+    <string name="vp8_simulcast"></string>
+    <string name="sender_bandwidth_constraints"></string>
+    <string name="max_audio_bitrate"></string>
+    <string name="max_video_bitrate"></string>
 </resources>
