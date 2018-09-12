@@ -3,9 +3,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="permissions_needed">Permission Needed</string>
     <string name="turn_speaker_on"></string>
-    <string name="settings"></string>
+    <string name="settings">Settings</string>
     <string name="room_status"></string>
-
 
     <string name="pref_title_audio_codec"></string>
     <string name="codec_title"></string>

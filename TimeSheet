@@ -40,3 +40,13 @@ https://hidden-hollows-28924.herokuapp.com/
 Ran through quick twilio tut to implement their SDK
 Implemented SDK
 Figured out the API keys, account sid, secret key and how to get access tokens (this might need to go on the server in the future)
+
+
+9/11
+
+6:00 - 9:20pm
+
+Seems like we need a java backend server to actually give us the auth token. the library does not work with android.
+https://codelabs.developers.google.com/codelabs/cloud-app-engine-springboot/index.html?index=..%2F..%2Findex#1
+
+http://care-216123.appspot.com/

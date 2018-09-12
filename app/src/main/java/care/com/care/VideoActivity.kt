@@ -17,12 +17,13 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.twilio.jwt.accesstoken.AccessToken
+import com.twilio.jwt.accesstoken.VideoGrant
 import com.twilio.video.*
 import kotlinx.android.synthetic.main.activity_video.*
 import kotlinx.android.synthetic.main.content_video.*
@@ -34,23 +35,13 @@ class VideoActivity : AppCompatActivity() {
     private val API_KEY = "SK86d31ae222282433f99ca24725e0f4c5"
     private val API_SECRET = "OAZ3wsX2iPHVtTlP6m7CQEGywvrxxR3N"
     private val ACCOUNT_ID = "ACb67d589e0ce9d697339d8ca0092b0b05"
+    private var username : String = ""
 
-    /*
-     * Access token used to connect. This field will be set either from the console generated token
-     * or the request to the token server.
-     */
+
     private lateinit var accessToken: String
-
-    /*
-     * A Room represents communication between a local participant and one or more participants.
-     */
     private var room: Room? = null
     private var localParticipant: LocalParticipant? = null
 
-    /*
-     * AudioCodec and VideoCodec represent the preferred codec for encoding and decoding audio and
-     * video.
-     */
     private val audioCodec: AudioCodec
         get() {
             val audioCodecName = sharedPreferences.getString(SettingsActivity.PREF_AUDIO_CODEC,
@@ -65,6 +56,7 @@ class VideoActivity : AppCompatActivity() {
                 else -> OpusCodec()
             }
         }
+
     private val videoCodec: VideoCodec
         get() {
             val videoCodecName = sharedPreferences.getString(SettingsActivity.PREF_VIDEO_CODEC,
@@ -83,9 +75,6 @@ class VideoActivity : AppCompatActivity() {
             }
         }
 
-    /*
-     * Encoding parameters represent the sender side bandwidth constraints.
-     */
     private val encodingParameters: EncodingParameters
         get() {
             val maxAudioBitrate = Integer.parseInt(
@@ -98,16 +87,18 @@ class VideoActivity : AppCompatActivity() {
             return EncodingParameters(maxAudioBitrate, maxVideoBitrate)
         }
 
-    /*
-     * Room events listener
-     */
     private val roomListener = object : Room.Listener {
+        override fun onRecordingStopped(room: Room?) {
+        }
+
+        override fun onRecordingStarted(room: Room?) {
+        }
+
         override fun onConnected(room: Room) {
             localParticipant = room.localParticipant
             videoStatusTextView.text = "Connected to ${room.name}"
             title = room.name
 
-            // Only one participant is supported
             room.remoteParticipants.firstOrNull()?.let { addRemoteParticipant(it) }
         }
 
@@ -136,214 +127,8 @@ class VideoActivity : AppCompatActivity() {
         override fun onParticipantDisconnected(room: Room, participant: RemoteParticipant) {
             removeRemoteParticipant(participant)
         }
-
-        override fun onRecordingStarted(room: Room) {
-            /*
-             * Indicates when media shared to a Room is being recorded. Note that
-             * recording is only available in our Group Rooms developer preview.
-             */
-            Log.d(TAG, "onRecordingStarted")
-        }
-
-        override fun onRecordingStopped(room: Room) {
-            /*
-             * Indicates when media shared to a Room is no longer being recorded. Note that
-             * recording is only available in our Group Rooms developer preview.
-             */
-            Log.d(TAG, "onRecordingStopped")
-        }
     }
 
-    /*
-     * RemoteParticipant events listener
-     */
-    private val participantListener = object : RemoteParticipant.Listener {
-        override fun onAudioTrackPublished(remoteParticipant: RemoteParticipant,
-                                           remoteAudioTrackPublication: RemoteAudioTrackPublication) {
-            Log.i(TAG, "onAudioTrackPublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteAudioTrackPublication: sid=${remoteAudioTrackPublication.trackSid}, " +
-                    "enabled=${remoteAudioTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteAudioTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteAudioTrackPublication.trackName}]")
-            videoStatusTextView.text = "onAudioTrackAdded"
-        }
-
-        override fun onAudioTrackUnpublished(remoteParticipant: RemoteParticipant,
-                                             remoteAudioTrackPublication: RemoteAudioTrackPublication) {
-            Log.i(TAG, "onAudioTrackUnpublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteAudioTrackPublication: sid=${remoteAudioTrackPublication.trackSid}, " +
-                    "enabled=${remoteAudioTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteAudioTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteAudioTrackPublication.trackName}]")
-            videoStatusTextView.text = "onAudioTrackRemoved"
-        }
-
-        override fun onDataTrackPublished(remoteParticipant: RemoteParticipant,
-                                          remoteDataTrackPublication: RemoteDataTrackPublication) {
-            Log.i(TAG, "onDataTrackPublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteDataTrackPublication: sid=${remoteDataTrackPublication.trackSid}, " +
-                    "enabled=${remoteDataTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteDataTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteDataTrackPublication.trackName}]")
-            videoStatusTextView.text = "onDataTrackPublished"
-        }
-
-        override fun onDataTrackUnpublished(remoteParticipant: RemoteParticipant,
-                                            remoteDataTrackPublication: RemoteDataTrackPublication) {
-            Log.i(TAG, "onDataTrackUnpublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteDataTrackPublication: sid=${remoteDataTrackPublication.trackSid}, " +
-                    "enabled=${remoteDataTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteDataTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteDataTrackPublication.trackName}]")
-            videoStatusTextView.text = "onDataTrackUnpublished"
-        }
-
-        override fun onVideoTrackPublished(remoteParticipant: RemoteParticipant,
-                                           remoteVideoTrackPublication: RemoteVideoTrackPublication) {
-            Log.i(TAG, "onVideoTrackPublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteVideoTrackPublication: sid=${remoteVideoTrackPublication.trackSid}, " +
-                    "enabled=${remoteVideoTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteVideoTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteVideoTrackPublication.trackName}]")
-            videoStatusTextView.text = "onVideoTrackPublished"
-        }
-
-        override fun onVideoTrackUnpublished(remoteParticipant: RemoteParticipant,
-                                             remoteVideoTrackPublication: RemoteVideoTrackPublication) {
-            Log.i(TAG, "onVideoTrackUnpublished: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteVideoTrackPublication: sid=${remoteVideoTrackPublication.trackSid}, " +
-                    "enabled=${remoteVideoTrackPublication.isTrackEnabled}, " +
-                    "subscribed=${remoteVideoTrackPublication.isTrackSubscribed}, " +
-                    "name=${remoteVideoTrackPublication.trackName}]")
-            videoStatusTextView.text = "onVideoTrackUnpublished"
-        }
-
-        override fun onAudioTrackSubscribed(remoteParticipant: RemoteParticipant,
-                                            remoteAudioTrackPublication: RemoteAudioTrackPublication,
-                                            remoteAudioTrack: RemoteAudioTrack) {
-            Log.i(TAG, "onAudioTrackSubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteAudioTrack: enabled=${remoteAudioTrack.isEnabled}, " +
-                    "playbackEnabled=${remoteAudioTrack.isPlaybackEnabled}, " +
-                    "name=${remoteAudioTrack.name}]")
-            videoStatusTextView.text = "onAudioTrackSubscribed"
-        }
-
-        override fun onAudioTrackUnsubscribed(remoteParticipant: RemoteParticipant,
-                                              remoteAudioTrackPublication: RemoteAudioTrackPublication,
-                                              remoteAudioTrack: RemoteAudioTrack) {
-            Log.i(TAG, "onAudioTrackUnsubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteAudioTrack: enabled=${remoteAudioTrack.isEnabled}, " +
-                    "playbackEnabled=${remoteAudioTrack.isPlaybackEnabled}, " +
-                    "name=${remoteAudioTrack.name}]")
-            videoStatusTextView.text = "onAudioTrackUnsubscribed"
-        }
-
-        override fun onAudioTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
-                                                    remoteAudioTrackPublication: RemoteAudioTrackPublication,
-                                                    twilioException: TwilioException) {
-            Log.i(TAG, "onAudioTrackSubscriptionFailed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteAudioTrackPublication: sid=${remoteAudioTrackPublication.trackSid}, " +
-                    "name=${remoteAudioTrackPublication.trackName}]" +
-                    "[TwilioException: code=${twilioException.code}, " +
-                    "message=${twilioException.message}]")
-            videoStatusTextView.text = "onAudioTrackSubscriptionFailed"
-        }
-
-        override fun onDataTrackSubscribed(remoteParticipant: RemoteParticipant,
-                                           remoteDataTrackPublication: RemoteDataTrackPublication,
-                                           remoteDataTrack: RemoteDataTrack) {
-            Log.i(TAG, "onDataTrackSubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteDataTrack: enabled=${remoteDataTrack.isEnabled}, " +
-                    "name=${remoteDataTrack.name}]")
-            videoStatusTextView.text = "onDataTrackSubscribed"
-        }
-
-        override fun onDataTrackUnsubscribed(remoteParticipant: RemoteParticipant,
-                                             remoteDataTrackPublication: RemoteDataTrackPublication,
-                                             remoteDataTrack: RemoteDataTrack) {
-            Log.i(TAG, "onDataTrackUnsubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteDataTrack: enabled=${remoteDataTrack.isEnabled}, " +
-                    "name=${remoteDataTrack.name}]")
-            videoStatusTextView.text = "onDataTrackUnsubscribed"
-        }
-
-        override fun onDataTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
-                                                    remoteDataTrackPublication: RemoteDataTrackPublication,
-                                                    twilioException: TwilioException) {
-            Log.i(TAG, "onDataTrackSubscriptionFailed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteDataTrackPublication: sid=${remoteDataTrackPublication.trackSid}, " +
-                    "name=${remoteDataTrackPublication.trackName}]" +
-                    "[TwilioException: code=${twilioException.code}, " +
-                    "message=${twilioException.message}]")
-            videoStatusTextView.text = "onDataTrackSubscriptionFailed"
-        }
-
-        override fun onVideoTrackSubscribed(remoteParticipant: RemoteParticipant,
-                                            remoteVideoTrackPublication: RemoteVideoTrackPublication,
-                                            remoteVideoTrack: RemoteVideoTrack) {
-            Log.i(TAG, "onVideoTrackSubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteVideoTrack: enabled=${remoteVideoTrack.isEnabled}, " +
-                    "name=${remoteVideoTrack.name}]")
-            videoStatusTextView.text = "onVideoTrackSubscribed"
-            addRemoteParticipantVideo(remoteVideoTrack)
-        }
-
-        override fun onVideoTrackUnsubscribed(remoteParticipant: RemoteParticipant,
-                                              remoteVideoTrackPublication: RemoteVideoTrackPublication,
-                                              remoteVideoTrack: RemoteVideoTrack) {
-            Log.i(TAG, "onVideoTrackUnsubscribed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteVideoTrack: enabled=${remoteVideoTrack.isEnabled}, " +
-                    "name=${remoteVideoTrack.name}]")
-            videoStatusTextView.text = "onVideoTrackUnsubscribed"
-            removeParticipantVideo(remoteVideoTrack)
-        }
-
-        override fun onVideoTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
-                                                    remoteVideoTrackPublication: RemoteVideoTrackPublication,
-                                                    twilioException: TwilioException) {
-            Log.i(TAG, "onVideoTrackSubscriptionFailed: " +
-                    "[RemoteParticipant: identity=${remoteParticipant.identity}], " +
-                    "[RemoteVideoTrackPublication: sid=${remoteVideoTrackPublication.trackSid}, " +
-                    "name=${remoteVideoTrackPublication.trackName}]" +
-                    "[TwilioException: code=${twilioException.code}, " +
-                    "message=${twilioException.message}]")
-            videoStatusTextView.text = "onVideoTrackSubscriptionFailed"
-            Snackbar.make(connectActionFab,
-                    "Failed to subscribe to ${remoteParticipant.identity}",
-                    Snackbar.LENGTH_LONG)
-                    .show()
-        }
-
-        override fun onAudioTrackEnabled(remoteParticipant: RemoteParticipant,
-                                         remoteAudioTrackPublication: RemoteAudioTrackPublication) {
-        }
-
-        override fun onVideoTrackEnabled(remoteParticipant: RemoteParticipant,
-                                         remoteVideoTrackPublication: RemoteVideoTrackPublication) {
-        }
-
-        override fun onVideoTrackDisabled(remoteParticipant: RemoteParticipant,
-                                          remoteVideoTrackPublication: RemoteVideoTrackPublication) {
-        }
-
-        override fun onAudioTrackDisabled(remoteParticipant: RemoteParticipant,
-                                          remoteAudioTrackPublication: RemoteAudioTrackPublication) {
-        }
-    }
 
     private var localAudioTrack: LocalAudioTrack? = null
     private var localVideoTrack: LocalVideoTrack? = null
@@ -352,10 +137,10 @@ class VideoActivity : AppCompatActivity() {
         CameraCapturerCompat(this, getAvailableCameraSource())
     }
     private val sharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this@VideoActivity)
+        PreferenceManager.getDefaultSharedPreferences(this)
     }
     private val audioManager by lazy {
-        this@VideoActivity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     private var participantIdentity: String? = null
@@ -369,34 +154,11 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
-        /*
-         * Set local video view to primary view
-         */
         localVideoView = primaryVideoView
-
-        /*
-         * Enable changing the volume using the up/down keys during a conversation
-         */
         volumeControlStream = AudioManager.STREAM_VOICE_CALL
-
-        /*
-         * Needed for setting/abandoning audio focus during call
-         */
         audioManager.isSpeakerphoneOn = true
-
-        /*
-         * Set access token
-         */
-        setAccessToken()
-
-        /*
-         * Request permissions.
-         */
+        retrieveAccessTokenfromServer()
         requestPermissionForCameraAndMicrophone()
-
-        /*
-         * Set the initial state of the UI
-         */
         initializeUI()
     }
 
@@ -423,9 +185,7 @@ class VideoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        /*
-         * If the local video track was released when the app was put in the background, recreate.
-         */
+
         localVideoTrack = if (localVideoTrack == null && checkPermissionForCameraAndMicrophone()) {
             LocalVideoTrack.create(this,
                     true,
@@ -435,14 +195,9 @@ class VideoActivity : AppCompatActivity() {
         }
         localVideoTrack?.addRenderer(localVideoView)
 
-        /*
-         * If connected to a Room then share the local video track.
-         */
+
         localVideoTrack?.let { localParticipant?.publishTrack(it) }
 
-        /*
-         * Update encoding parameters if they have changed.
-         */
         localParticipant?.setEncodingParameters(encodingParameters)
     }
 
@@ -542,43 +297,23 @@ class VideoActivity : AppCompatActivity() {
             CameraCapturer.CameraSource.BACK_CAMERA
     }
 
-    private fun setAccessToken() {
-            retrieveAccessTokenfromServer()
-    }
-
     private fun connectToRoom(roomName: String) {
         configureAudio(true)
         val connectOptionsBuilder = ConnectOptions.Builder(accessToken)
                 .roomName(roomName)
 
-        /*
-         * Add local audio track to connect options to share with participants.
-         */
-        localAudioTrack?.let { connectOptionsBuilder.audioTracks(listOf(it)) }
 
-        /*
-         * Add local video track to connect options to share with participants.
-         */
+        localAudioTrack?.let { connectOptionsBuilder.audioTracks(listOf(it)) }
         localVideoTrack?.let { connectOptionsBuilder.videoTracks(listOf(it)) }
 
-        /*
-         * Set the preferred audio and video codec for media.
-         */
         connectOptionsBuilder.preferAudioCodecs(listOf(audioCodec))
         connectOptionsBuilder.preferVideoCodecs(listOf(videoCodec))
-
-        /*
-         * Set the sender side encoding parameters.
-         */
         connectOptionsBuilder.encodingParameters(encodingParameters)
 
         room = Video.connect(this, connectOptionsBuilder.build(), roomListener)
         setDisconnectAction()
     }
 
-    /*
-     * The initial state when there is no active room.
-     */
     private fun initializeUI() {
         connectActionFab.setImageDrawable(ContextCompat.getDrawable(this,
                 R.drawable.ic_video_call_white_24dp))
@@ -637,11 +372,6 @@ class VideoActivity : AppCompatActivity() {
                 remoteVideoTrackPublication.remoteVideoTrack?.let { addRemoteParticipantVideo(it) }
             }
         }
-
-        /*
-         * Start listening for participant events
-         */
-        remoteParticipant.setListener(participantListener)
     }
 
     /*
@@ -666,18 +396,12 @@ class VideoActivity : AppCompatActivity() {
         }
     }
 
-    /*
-     * Called when participant leaves the room
-     */
     private fun removeRemoteParticipant(remoteParticipant: RemoteParticipant) {
         videoStatusTextView.text = "Participant $remoteParticipant.identity left."
         if (remoteParticipant.identity != participantIdentity) {
             return
         }
 
-        /*
-         * Remove participant renderer
-         */
         remoteParticipant.remoteVideoTracks.firstOrNull()?.let { remoteVideoTrackPublication ->
             if (remoteVideoTrackPublication.isTrackSubscribed) {
                 remoteVideoTrackPublication.remoteVideoTrack?.let { removeParticipantVideo(it) }
@@ -705,18 +429,12 @@ class VideoActivity : AppCompatActivity() {
 
     private fun connectClickListener(roomEditText: EditText): DialogInterface.OnClickListener {
         return DialogInterface.OnClickListener { _, _ ->
-            /*
-             * Connect to room
-             */
             connectToRoom(roomEditText.text.toString())
         }
     }
 
     private fun disconnectClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            /*
-             * Disconnect from room
-             */
             room?.disconnect()
             initializeUI()
         }
@@ -747,9 +465,6 @@ class VideoActivity : AppCompatActivity() {
 
     private fun localVideoClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            /*
-             * Enable/disable the local video track
-             */
             localVideoTrack?.let {
                 val enable = !it.isEnabled
                 it.enable(enable)
@@ -762,18 +477,14 @@ class VideoActivity : AppCompatActivity() {
                     switchCameraActionFab.hide()
                 }
                 localVideoActionFab.setImageDrawable(
-                        ContextCompat.getDrawable(this@VideoActivity, icon))
+                        ContextCompat.getDrawable(this, icon))
             }
         }
     }
 
     private fun muteClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            /*
-             * Enable/disable the local audio track. The results of this operation are
-             * signaled to other Participants in the same Room. When an audio track is
-             * disabled, the audio is muted.
-             */
+
             localAudioTrack?.let {
                 val enable = !it.isEnabled
                 it.enable(enable)
@@ -782,13 +493,15 @@ class VideoActivity : AppCompatActivity() {
                 else
                     R.drawable.ic_mic_off_black_24dp
                 muteActionFab.setImageDrawable(ContextCompat.getDrawable(
-                        this@VideoActivity, icon))
+                        this, icon))
             }
         }
     }
 
     private fun retrieveAccessTokenfromServer() {
-        accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzk0NGFkNjQwZTcxMDM0ZjhhOGJkMDY2NGI2MDFkMzU1LTE1MzY2Mjk2MDYiLCJpc3MiOiJTSzk0NGFkNjQwZTcxMDM0ZjhhOGJkMDY2NGI2MDFkMzU1Iiwic3ViIjoiQUNiNjdkNTg5ZTBjZTlkNjk3MzM5ZDhjYTAwOTJiMGIwNSIsImV4cCI6MTUzNjYzMzIwNiwiZ3JhbnRzIjp7ImlkZW50aXR5IjoiYWIiLCJ2aWRlbyI6e319fQ.evTARE86B2xo3P550csga0WrUquR7s0rKHUUDCPcPq4"
+        val grant = VideoGrant()
+        grant.room = "Room"
+        accessToken = AccessToken.Builder(ACCOUNT_ID, API_KEY, API_SECRET).identity(username).grant(grant).build().toJwt()
     }
 
     private fun configureAudio(enable: Boolean) {
@@ -797,16 +510,8 @@ class VideoActivity : AppCompatActivity() {
                 previousAudioMode = audioManager.mode
                 // Request audio focus before making any device switch
                 requestAudioFocus()
-                /*
-                 * Use MODE_IN_COMMUNICATION as the default audio mode. It is required
-                 * to be in this mode when playout and/or recording starts for the best
-                 * possible VoIP performance. Some devices have difficulties with
-                 * speaker mode if this is not set.
-                 */
+
                 mode = AudioManager.MODE_IN_COMMUNICATION
-                /*
-                 * Always disable microphone mute during a WebRTC call.
-                 */
                 previousMicrophoneMute = isMicrophoneMute
                 isMicrophoneMute = false
             } else {
