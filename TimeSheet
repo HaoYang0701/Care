@@ -58,7 +58,7 @@ http://care-216123.appspot.com/
 started server side token code
 
 
-8pm - 
+8pm - 12: 40pm
 
 curl https://start.spring.io/starter.tgz -d packaging=war \ -d dependencies=web -d baseDir=gae-standard-example | tar -xzvf -
 
