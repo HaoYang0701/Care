@@ -56,3 +56,48 @@ http://care-216123.appspot.com/
 12 - 2:30
 
 started server side token code
+
+
+8pm - 
+
+curl https://start.spring.io/starter.tgz -d packaging=war \ -d dependencies=web -d baseDir=gae-standard-example | tar -xzvf -
+
+
+import org.springframework.web.bind.annotation.*;
+@GetMapping("/")
+
+/home/yang_hao0701/gae-standard-example/mvnw
+
+
+
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+public class ServletInitializer extends SpringBootServletInitializer {
+        @Override
+        protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+                return application.sources(DemoApplication.class);
+        }
+}
+
+
+
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+@SpringBootApplication
+@RestController
+public class DemoApplication {
+        public static void main(String[] args) {
+                SpringApplication.run(DemoApplication.class, args);
+        }
+    @GetMapping("/")
+    public String hello() {
+        return "hello world";
+    }
+}
+
+
+https://8080-dot-4422938-dot-devshell.appspot.com/token 
+IT WORKSSSS
