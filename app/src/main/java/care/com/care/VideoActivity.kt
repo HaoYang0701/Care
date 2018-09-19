@@ -94,7 +94,9 @@ class VideoActivity : AppCompatActivity() {
 
     private val roomListener = object : Room.Listener {
         override fun onRecordingStopped(room: Room?) {
+
         }
+
 
         override fun onRecordingStarted(room: Room?) {
         }
@@ -131,6 +133,96 @@ class VideoActivity : AppCompatActivity() {
 
         override fun onParticipantDisconnected(room: Room, participant: RemoteParticipant) {
             removeRemoteParticipant(participant)
+        }
+    }
+
+    private val participantListener = object : RemoteParticipant.Listener {
+        override fun onAudioTrackPublished(remoteParticipant: RemoteParticipant,
+                                           remoteAudioTrackPublication: RemoteAudioTrackPublication) {
+            videoStatusTextView.text = "onAudioTrackAdded"
+        }
+        override fun onAudioTrackUnpublished(remoteParticipant: RemoteParticipant,
+                                             remoteAudioTrackPublication: RemoteAudioTrackPublication) {
+            videoStatusTextView.text = "onAudioTrackRemoved"
+        }
+        override fun onDataTrackPublished(remoteParticipant: RemoteParticipant,
+                                          remoteDataTrackPublication: RemoteDataTrackPublication) {
+            videoStatusTextView.text = "onDataTrackPublished"
+        }
+        override fun onDataTrackUnpublished(remoteParticipant: RemoteParticipant,
+                                            remoteDataTrackPublication: RemoteDataTrackPublication) {
+            videoStatusTextView.text = "onDataTrackUnpublished"
+        }
+        override fun onVideoTrackPublished(remoteParticipant: RemoteParticipant,
+                                           remoteVideoTrackPublication: RemoteVideoTrackPublication) {
+            videoStatusTextView.text = "onVideoTrackPublished"
+        }
+        override fun onVideoTrackUnpublished(remoteParticipant: RemoteParticipant,
+                                             remoteVideoTrackPublication: RemoteVideoTrackPublication) {
+            videoStatusTextView.text = "onVideoTrackUnpublished"
+        }
+        override fun onAudioTrackSubscribed(remoteParticipant: RemoteParticipant,
+                                            remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                                            remoteAudioTrack: RemoteAudioTrack) {
+            videoStatusTextView.text = "onAudioTrackSubscribed"
+        }
+        override fun onAudioTrackUnsubscribed(remoteParticipant: RemoteParticipant,
+                                              remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                                              remoteAudioTrack: RemoteAudioTrack) {
+            videoStatusTextView.text = "onAudioTrackUnsubscribed"
+        }
+        override fun onAudioTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
+                                                    remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                                                    twilioException: TwilioException) {
+            videoStatusTextView.text = "onAudioTrackSubscriptionFailed"
+        }
+        override fun onDataTrackSubscribed(remoteParticipant: RemoteParticipant,
+                                           remoteDataTrackPublication: RemoteDataTrackPublication,
+                                           remoteDataTrack: RemoteDataTrack) {
+            videoStatusTextView.text = "onDataTrackSubscribed"
+        }
+        override fun onDataTrackUnsubscribed(remoteParticipant: RemoteParticipant,
+                                             remoteDataTrackPublication: RemoteDataTrackPublication,
+                                             remoteDataTrack: RemoteDataTrack) {
+            videoStatusTextView.text = "onDataTrackUnsubscribed"
+        }
+        override fun onDataTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
+                                                   remoteDataTrackPublication: RemoteDataTrackPublication,
+                                                   twilioException: TwilioException) {
+            videoStatusTextView.text = "onDataTrackSubscriptionFailed"
+        }
+        override fun onVideoTrackSubscribed(remoteParticipant: RemoteParticipant,
+                                            remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                                            remoteVideoTrack: RemoteVideoTrack) {
+            videoStatusTextView.text = "onVideoTrackSubscribed"
+            addRemoteParticipantVideo(remoteVideoTrack)
+        }
+        override fun onVideoTrackUnsubscribed(remoteParticipant: RemoteParticipant,
+                                              remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                                              remoteVideoTrack: RemoteVideoTrack) {
+            videoStatusTextView.text = "onVideoTrackUnsubscribed"
+            removeParticipantVideo(remoteVideoTrack)
+        }
+        override fun onVideoTrackSubscriptionFailed(remoteParticipant: RemoteParticipant,
+                                                    remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                                                    twilioException: TwilioException) {
+            videoStatusTextView.text = "onVideoTrackSubscriptionFailed"
+            Snackbar.make(connectActionFab,
+                    "Failed to subscribe to ${remoteParticipant.identity}",
+                    Snackbar.LENGTH_LONG)
+                    .show()
+        }
+        override fun onAudioTrackEnabled(remoteParticipant: RemoteParticipant,
+                                         remoteAudioTrackPublication: RemoteAudioTrackPublication) {
+        }
+        override fun onVideoTrackEnabled(remoteParticipant: RemoteParticipant,
+                                         remoteVideoTrackPublication: RemoteVideoTrackPublication) {
+        }
+        override fun onVideoTrackDisabled(remoteParticipant: RemoteParticipant,
+                                          remoteVideoTrackPublication: RemoteVideoTrackPublication) {
+        }
+        override fun onAudioTrackDisabled(remoteParticipant: RemoteParticipant,
+                                          remoteAudioTrackPublication: RemoteAudioTrackPublication) {
         }
     }
 
@@ -375,6 +467,7 @@ class VideoActivity : AppCompatActivity() {
                 remoteVideoTrackPublication.remoteVideoTrack?.let { addRemoteParticipantVideo(it) }
             }
         }
+        remoteParticipant.setListener(participantListener)
     }
 
     /*
