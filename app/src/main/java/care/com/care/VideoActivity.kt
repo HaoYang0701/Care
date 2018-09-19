@@ -22,9 +22,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.twilio.jwt.accesstoken.AccessToken
+import care.com.care.Network.ApiService
 import com.twilio.jwt.accesstoken.VideoGrant
 import com.twilio.video.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_video.*
 import kotlinx.android.synthetic.main.content_video.*
 
@@ -37,6 +39,9 @@ class VideoActivity : AppCompatActivity() {
     private val ACCOUNT_ID = "ACb67d589e0ce9d697339d8ca0092b0b05"
     private var username : String = ""
 
+    private val apiService by lazy {
+        ApiService.createRetrofitService()
+    }
 
     private lateinit var accessToken: String
     private var room: Room? = null
@@ -158,8 +163,6 @@ class VideoActivity : AppCompatActivity() {
         volumeControlStream = AudioManager.STREAM_VOICE_CALL
         audioManager.isSpeakerphoneOn = true
         retrieveAccessTokenfromServer()
-        requestPermissionForCameraAndMicrophone()
-        initializeUI()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -501,7 +504,17 @@ class VideoActivity : AppCompatActivity() {
     private fun retrieveAccessTokenfromServer() {
         val grant = VideoGrant()
         grant.room = "Room"
-        accessToken = AccessToken.Builder(ACCOUNT_ID, API_KEY, API_SECRET).identity(username).grant(grant).build().toJwt()
+        apiService
+                .getToken()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    accessToken = it.content
+                    requestPermissionForCameraAndMicrophone()
+                    initializeUI()
+                },{
+                    System.out.println("Can't get tokens")
+                })
     }
 
     private fun configureAudio(enable: Boolean) {
