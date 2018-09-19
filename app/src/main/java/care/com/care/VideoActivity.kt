@@ -33,11 +33,6 @@ import kotlinx.android.synthetic.main.content_video.*
 
 class VideoActivity : AppCompatActivity() {
     private val CAMERA_MIC_PERMISSION_REQUEST_CODE = 1
-    private val TAG = "VideoActivity"
-    private val API_KEY = "SK86d31ae222282433f99ca24725e0f4c5"
-    private val API_SECRET = "OAZ3wsX2iPHVtTlP6m7CQEGywvrxxR3N"
-    private val ACCOUNT_ID = "ACb67d589e0ce9d697339d8ca0092b0b05"
-    private var username : String = ""
 
     private val apiService by lazy {
         ApiService.createRetrofitService()
