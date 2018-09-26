@@ -1,4 +1,4 @@
-package care.com.care.Login
+package care.com.care.Registration
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -7,17 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import care.com.care.R
-import care.com.care.databinding.LoginFragmentBinding
+import care.com.care.databinding.RegistrationFragmentBinding
 
+class RegistrationFragment : RegistrationContract.View, Fragment(){
+    private lateinit var presenter: RegistrationContract.Presenter
 
-class LoginFragment : LoginContract.View, Fragment() {
-    private lateinit var presenter: LoginContract.Presenter
+    override fun setPresenter(presenter: RegistrationContract.Presenter) {
+        this.presenter = presenter
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding : LoginFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
+        val binding : RegistrationFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
         val view : View = binding.root
         return view
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -29,16 +33,9 @@ class LoginFragment : LoginContract.View, Fragment() {
         presenter.unsubscribe()
     }
 
-    override fun setPresenter(presenter: LoginContract.Presenter) {
-        this.presenter = presenter
-    }
-
-
     companion object {
-        fun newInstance() : LoginFragment{
-            return LoginFragment()
+        fun newInstance() : RegistrationFragment{
+            return RegistrationFragment()
         }
     }
-
-
 }

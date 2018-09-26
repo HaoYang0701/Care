@@ -13,4 +13,7 @@
     <string name="sender_bandwidth_constraints"></string>
     <string name="max_audio_bitrate"></string>
     <string name="max_video_bitrate"></string>
+    <string name="log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

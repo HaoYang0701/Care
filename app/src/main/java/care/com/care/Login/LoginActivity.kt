@@ -1,19 +1,22 @@
 package care.com.care.Login
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import care.com.care.R
+import care.com.care.Utils.replaceFragmentInActivity
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var loginPresenter: LoginPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
 
-        var loginFragment : LoginFragment? =
-                supportFragmentManager.findFragmentById(R.id.contentFrame)
-                        as LoginFragment ?: LoginFragment.newInstance().also {
-                    replace
+        val loginFragment  = supportFragmentManager.findFragmentById(R.id.contentFrame)
+                        as LoginFragment? ?: LoginFragment.newInstance().also {
+                    replaceFragmentInActivity(it, R.id.contentFrame)
                 }
 
+        loginPresenter = LoginPresenter(loginFragment)
     }
 }
