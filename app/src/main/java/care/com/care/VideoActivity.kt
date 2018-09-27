@@ -10,19 +10,19 @@ import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import care.com.care.Network.ApiService
+import com.google.android.material.snackbar.Snackbar
 import com.twilio.jwt.accesstoken.VideoGrant
 import com.twilio.video.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -224,7 +224,7 @@ class VideoActivity : AppCompatActivity() {
 
     private var localAudioTrack: LocalAudioTrack? = null
     private var localVideoTrack: LocalVideoTrack? = null
-    private var alertDialog: android.support.v7.app.AlertDialog? = null
+    private var alertDialog: AlertDialog? = null
     private val cameraCapturerCompat by lazy {
         CameraCapturerCompat(this, getAvailableCameraSource())
     }
@@ -659,7 +659,7 @@ class VideoActivity : AppCompatActivity() {
     }
 
     @SuppressLint("RestrictedApi")
-    private fun setRoomNameFieldInDialog(roomNameEditText: EditText,
+        private fun setRoomNameFieldInDialog(roomNameEditText: EditText,
                                          alertDialogBuilder: AlertDialog.Builder,
                                          context: Context) {
         roomNameEditText.hint = "room name"

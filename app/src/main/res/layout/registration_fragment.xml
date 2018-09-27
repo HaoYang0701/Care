@@ -30,6 +30,20 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/email"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="@string/username"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -48,6 +62,20 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/confirm_password"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,17 +83,8 @@
                 android:layout_marginStart="64dp"
                 android:layout_marginEnd="64dp"
                 android:id="@+id/login_button"
-                android:text="@string/log_in"
+                android:text="@string/register"
                 android:background="@color/accent"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginEnd="64dp"
-                android:text="New User? Register. Forgot password? Reset"/>
         </LinearLayout>
-
-
     </LinearLayout>
 </layout>

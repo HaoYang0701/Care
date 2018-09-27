@@ -58,14 +58,26 @@
             android:text="@string/log_in"
             android:background="@color/accent"/>
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
-            android:text="New User? Register. Forgot password? Reset"/>
+            android:id="@+id/register_button"
+            android:text="@string/register"
+            android:background="@color/accent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:id="@+id/forgot_password_button"
+            android:text="@string/forgot_your_password"
+            android:background="@color/accent"/>
+
     </LinearLayout>
-
-
 </LinearLayout>
 </layout>

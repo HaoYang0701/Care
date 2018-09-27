@@ -16,4 +16,9 @@
     <string name="log_in">Log In</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

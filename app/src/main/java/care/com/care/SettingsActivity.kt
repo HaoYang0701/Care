@@ -2,13 +2,9 @@ package care.com.care
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.EditTextPreference
-import android.support.v7.preference.ListPreference
-import android.support.v7.preference.Preference
-import android.support.v7.preference.PreferenceFragmentCompat
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.*
 import com.twilio.video.*
 import org.webrtc.MediaCodecVideoDecoder
 import org.webrtc.MediaCodecVideoEncoder
