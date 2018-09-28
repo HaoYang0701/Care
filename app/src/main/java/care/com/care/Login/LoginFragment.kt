@@ -13,17 +13,6 @@ import care.com.care.databinding.LoginFragmentBinding
 
 
 class LoginFragment : LoginContract.View, Fragment() {
-    override fun goToForgotPasswordScreen() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun goToRegistrationScreen() {
-        startActivity(Intent(context, RegistrationActivity::class.java))
-    }
-
-    override fun goToHomeScreen() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private lateinit var presenter: LoginContract.Presenter
     private lateinit var viewBinding : LoginFragmentBinding
@@ -55,6 +44,16 @@ class LoginFragment : LoginContract.View, Fragment() {
         this.presenter = presenter
     }
 
+
+    override fun goToForgotPasswordScreen() {
+    }
+
+    override fun goToRegistrationScreen() {
+        startActivity(Intent(context, RegistrationActivity::class.java))
+    }
+
+    override fun goToHomeScreen() {
+    }
 
     companion object {
         fun newInstance() : LoginFragment{

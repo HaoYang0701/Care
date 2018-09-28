@@ -1,5 +1,8 @@
 package care.com.care.base
 
-interface BaseView<T> {
+interface BaseViewModel<T> {
+
     fun setPresenter(presenter : T)
+
+    fun getPresenter() : T?
 }
