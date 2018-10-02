@@ -21,7 +21,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import care.com.care.Network.ApiService
+import care.com.care.Network.ApiEndpoint
+import care.com.care.data.database.source.remote.RemoteDataSource
 import com.google.android.material.snackbar.Snackbar
 import com.twilio.jwt.accesstoken.VideoGrant
 import com.twilio.video.*
@@ -33,11 +34,6 @@ import kotlinx.android.synthetic.main.content_video.*
 
 class VideoActivity : AppCompatActivity() {
     private val CAMERA_MIC_PERMISSION_REQUEST_CODE = 1
-
-    private val apiService by lazy {
-        ApiService.createRetrofitService()
-    }
-
     private lateinit var accessToken: String
     private var room: Room? = null
     private var localParticipant: LocalParticipant? = null
@@ -592,10 +588,8 @@ class VideoActivity : AppCompatActivity() {
     private fun retrieveAccessTokenfromServer() {
         val grant = VideoGrant()
         grant.room = "Room"
-        apiService
+        RemoteDataSource
                 .getToken()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     accessToken = it.content
                     requestPermissionForCameraAndMicrophone()

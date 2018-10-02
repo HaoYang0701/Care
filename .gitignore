@@ -1,0 +1,4 @@
+*.bin
+.gradle/4.6/fileHashes/fileHashes.bin
+*.lock
+*.bin
