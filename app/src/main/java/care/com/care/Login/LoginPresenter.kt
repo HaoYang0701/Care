@@ -6,9 +6,7 @@ class LoginPresenter(val loginView: LoginContract.View) : LoginContract.Presente
         loginView.setPresenter(this)
     }
 
-
     override fun subscribe() {
-
     }
 
     override fun unsubscribe() {
@@ -24,6 +22,5 @@ class LoginPresenter(val loginView: LoginContract.View) : LoginContract.Presente
     }
 
     override fun onLoginButtonClicked() {
-        TODO(reason = "not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

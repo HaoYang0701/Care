@@ -6,6 +6,7 @@ import care.com.care.base.BaseViewModel
 class LoginViewModel : BaseViewModel<LoginContract.Presenter>, ViewModel() {
     private var presenter : LoginContract.Presenter? = null
 
+
     override fun getPresenter(): LoginContract.Presenter? {
         return this.presenter
     }

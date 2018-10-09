@@ -1,4 +1,4 @@
-package care.com.care.Registration
+package care.com.care.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,17 +11,18 @@ import care.com.care.databinding.RegistrationFragmentBinding
 
 class RegistrationFragment : RegistrationContract.View, Fragment(){
     private lateinit var presenter: RegistrationContract.Presenter
+    private lateinit var viewBinding : RegistrationFragmentBinding
 
     override fun setPresenter(presenter: RegistrationContract.Presenter) {
         this.presenter = presenter
+        viewBinding.presenter = this.presenter
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding : RegistrationFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
-        val view : View = binding.root
+        viewBinding = DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
+        val view : View = viewBinding.root
         return view
     }
-
 
     override fun onResume() {
         super.onResume()

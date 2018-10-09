@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import care.com.care.R
-import care.com.care.Registration.RegistrationActivity
+import care.com.care.registration.RegistrationActivity
 import care.com.care.databinding.LoginFragmentBinding
 
 
@@ -53,6 +53,7 @@ class LoginFragment : LoginContract.View, Fragment() {
     }
 
     override fun goToHomeScreen() {
+
     }
 
     companion object {

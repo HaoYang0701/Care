@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -28,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".Registration.RegistrationActivity"
+            android:name=".registration.RegistrationActivity"
             android:theme="@style/AppTheme"/>
 
         <activity
@@ -39,6 +42,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VideoActivity" />
         </activity>
+        <service android:name=".Service.UserLocationService" />
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
-package care.com.care.Registration
+package care.com.care.registration
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import care.com.care.R
 import care.com.care.Utils.replaceFragmentInActivity
 
@@ -16,6 +17,7 @@ class RegistrationActivity : AppCompatActivity() {
             replaceFragmentInActivity(it, R.id.contentFrame)
         }
 
+        val loginViewModel = ViewModelProviders.of(this).get(RegistrationViewModel::class.java)
         presenter = RegistrationPresenter(registrationFragment)
     }
 }

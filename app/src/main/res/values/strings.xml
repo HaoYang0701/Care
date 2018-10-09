@@ -16,9 +16,13 @@
     <string name="log_in">Log In</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="register">Register</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="location_already_enabled">Location Permission Already Enabled</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="zipcode">Zipcode</string>
 </resources>
