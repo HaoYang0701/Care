@@ -1,12 +1,19 @@
 package care.com.care.data.database.source
 
 import care.com.care.Model.Job
+import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
 import care.com.care.data.database.source.local.LocalDataSource
 import care.com.care.data.database.source.remote.RemoteDataSource
 import io.reactivex.Flowable
+import io.reactivex.Observable
 
 class Repository(val remoteDataSource : RemoteDataSource, val localDataSource: LocalDataSource) : DataSource {
+
+    override fun registerNewUser(jsonParams: String): Observable<RegistrationResponse> {
+        return remoteDataSource.registerNewUser(jsonParams)
+    }
+
     var casheIsDirty = false
     var cachedJobs : LinkedHashMap<String, Job> = LinkedHashMap()
 

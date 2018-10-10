@@ -1,8 +1,11 @@
 package care.com.care.data.database.source
 
 import care.com.care.Model.Job
+import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
 import io.reactivex.Flowable
+import io.reactivex.Observable
+import okhttp3.RequestBody
 
 interface DataSource {
     fun getJobRequests(): Flowable<List<Job>>
@@ -18,4 +21,6 @@ interface DataSource {
     fun deleteJob(jobID: String)
 
     fun getToken() : Flowable<Token>
+
+    fun registerNewUser(jsonParams: String): Observable<RegistrationResponse>
 }

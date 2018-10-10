@@ -1,11 +1,17 @@
 package care.com.care.data.database.source.local
 
 import care.com.care.Model.Job
+import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
 import care.com.care.data.database.source.DataSource
 import io.reactivex.Flowable
+import io.reactivex.Observable
 
 class LocalDataSource(val localDao : LocalDao) : DataSource {
+
+    override fun registerNewUser(jsonParams: String): Observable<RegistrationResponse> {
+        return Observable.empty()
+    }
 
     override fun getToken(): Flowable<Token> {
         return Flowable.empty()
