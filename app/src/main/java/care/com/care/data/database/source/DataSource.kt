@@ -3,9 +3,11 @@ package care.com.care.data.database.source
 import care.com.care.Model.Job
 import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
+import care.com.care.Network.RegistrationRequest
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import okhttp3.RequestBody
+import retrofit2.Response
 
 interface DataSource {
     fun getJobRequests(): Flowable<List<Job>>
@@ -22,5 +24,5 @@ interface DataSource {
 
     fun getToken() : Flowable<Token>
 
-    fun registerNewUser(jsonParams: String): Observable<RegistrationResponse>
+    fun registerNewUser(request: RegistrationRequest): Observable<Response<RegistrationResponse>>
 }

@@ -3,13 +3,15 @@ package care.com.care.data.database.source.local
 import care.com.care.Model.Job
 import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
+import care.com.care.Network.RegistrationRequest
 import care.com.care.data.database.source.DataSource
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import retrofit2.Response
 
 class LocalDataSource(val localDao : LocalDao) : DataSource {
 
-    override fun registerNewUser(jsonParams: String): Observable<RegistrationResponse> {
+    override fun registerNewUser(request: RegistrationRequest): Observable<Response<RegistrationResponse>> {
         return Observable.empty()
     }
 

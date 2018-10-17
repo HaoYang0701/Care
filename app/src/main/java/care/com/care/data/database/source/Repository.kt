@@ -3,15 +3,17 @@ package care.com.care.data.database.source
 import care.com.care.Model.Job
 import care.com.care.Model.RegistrationResponse
 import care.com.care.Model.Token
+import care.com.care.Network.RegistrationRequest
 import care.com.care.data.database.source.local.LocalDataSource
 import care.com.care.data.database.source.remote.RemoteDataSource
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import retrofit2.Response
 
 class Repository(val remoteDataSource : RemoteDataSource, val localDataSource: LocalDataSource) : DataSource {
 
-    override fun registerNewUser(jsonParams: String): Observable<RegistrationResponse> {
-        return remoteDataSource.registerNewUser(jsonParams)
+    override fun registerNewUser(registrationRequest: RegistrationRequest): Observable<Response<RegistrationResponse>> {
+        return remoteDataSource.registerNewUser(registrationRequest)
     }
 
     var casheIsDirty = false

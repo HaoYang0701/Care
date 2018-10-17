@@ -13,6 +13,6 @@ data class Body(
     val first_name: String,
     val last_name: String,
     val email: String,
-    val cellphone_number: Int,
+    val cellphone_number: String,
     val user_account_status: String
 )

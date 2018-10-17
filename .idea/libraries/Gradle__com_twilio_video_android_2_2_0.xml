@@ -1,9 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.twilio:video-android-2.2.0">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/3467cbf54cb9437c5705a6de907ea85b/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/8ac5a61e3704272446161c18ac3755e4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/8ac5a61e3704272446161c18ac3755e4/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/8ac5a61e3704272446161c18ac3755e4/jars/libs/libjingle_peerconnection_java.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/3467cbf54cb9437c5705a6de907ea85b/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/3467cbf54cb9437c5705a6de907ea85b/jars/libs/libjingle_peerconnection_java.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-video-android-2.2.0.aar/3467cbf54cb9437c5705a6de907ea85b/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

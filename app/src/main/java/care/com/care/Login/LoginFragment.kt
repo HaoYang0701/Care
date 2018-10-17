@@ -1,18 +1,24 @@
 package care.com.care.Login
 
+import android.annotation.TargetApi
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import care.com.care.Login.twoFactorAuth.TwoFactorActivity
 import care.com.care.R
 import care.com.care.registration.RegistrationActivity
 import care.com.care.databinding.LoginFragmentBinding
 
 
 class LoginFragment : LoginContract.View, Fragment() {
+    override fun goToSettings() {
+        startActivity(Intent(context, TwoFactorActivity::class.java))
+    }
 
     private lateinit var presenter: LoginContract.Presenter
     private lateinit var viewBinding : LoginFragmentBinding
@@ -28,6 +34,7 @@ class LoginFragment : LoginContract.View, Fragment() {
         viewBinding.loginButton.setOnClickListener { presenter.onLoginButtonClicked() }
         viewBinding.registerButton.setOnClickListener { presenter.onRegistrationClicked() }
         viewBinding.forgotPasswordButton.setOnClickListener { presenter.onForgotPasswordClicked() }
+        viewBinding.fab.setOnClickListener{presenter.onFabClicked()}
     }
 
     override fun onResume() {

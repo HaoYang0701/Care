@@ -11,6 +11,8 @@ interface LoginContract {
         fun goToRegistrationScreen()
 
         fun goToForgotPasswordScreen()
+
+        fun goToSettings()
     }
 
     interface Presenter : BasePresenter {
@@ -19,5 +21,7 @@ interface LoginContract {
         fun onRegistrationClicked()
 
         fun onForgotPasswordClicked()
+
+        fun onFabClicked()
     }
 }

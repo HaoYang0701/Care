@@ -57,18 +57,32 @@ class RegistrationObservable : BaseObservable() {
             notifyPropertyChanged(BR.phone)
         }
 
-
     @get:Bindable
-    var age: String = ""
+    var dayOfBirth : Int = 0
         set(value) {
             field = value
-            notifyPropertyChanged(BR.age)
+            notifyPropertyChanged(BR.dayOfBirth)
         }
 
     @get:Bindable
-    var dateOfBirth : Int = 0
+    var yearOfBirth : Int = 0
         set(value) {
             field = value
-            notifyPropertyChanged(BR.dateOfBirth)
+            notifyPropertyChanged(BR.yearOfBirth)
+        }
+
+
+    @get:Bindable
+    var monthOfBirth : Int = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.monthOfBirth)
+        }
+
+    @get:Bindable
+    var showRegistrationError : Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.showRegistrationError)
         }
 }

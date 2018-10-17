@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity(){
                     replaceFragmentInActivity(it, R.id.contentFrame)
                 }
 
+
         loginPresenter = loginViewModel.getPresenter() as LoginPresenter? ?:
                 LoginPresenter(loginFragment).also {
                     loginViewModel.setPresenter(it)
