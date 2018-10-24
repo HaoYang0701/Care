@@ -8,9 +8,13 @@ import care.com.care.data.database.source.local.LocalDataSource
 import care.com.care.data.database.source.remote.RemoteDataSource
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import retrofit2.Response
 
 class Repository(val remoteDataSource : RemoteDataSource, val localDataSource: LocalDataSource) : DataSource {
+    override fun uploadImage(image: MultipartBody.Part) {
+
+    }
 
     override fun registerNewUser(registrationRequest: RegistrationRequest): Observable<Response<RegistrationResponse>> {
         return remoteDataSource.registerNewUser(registrationRequest)

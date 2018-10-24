@@ -7,9 +7,13 @@ import care.com.care.Network.RegistrationRequest
 import care.com.care.data.database.source.DataSource
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import retrofit2.Response
 
 class LocalDataSource(val localDao : LocalDao) : DataSource {
+    override fun uploadImage(image: MultipartBody.Part) {
+
+    }
 
     override fun registerNewUser(request: RegistrationRequest): Observable<Response<RegistrationResponse>> {
         return Observable.empty()

@@ -13,11 +13,12 @@ import care.com.care.Login.twoFactorAuth.TwoFactorActivity
 import care.com.care.R
 import care.com.care.registration.RegistrationActivity
 import care.com.care.databinding.LoginFragmentBinding
+import care.com.care.documentupload.DocumentUploadActivity
 
 
 class LoginFragment : LoginContract.View, Fragment() {
     override fun goToSettings() {
-        startActivity(Intent(context, TwoFactorActivity::class.java))
+        startActivity(Intent(context, DocumentUploadActivity::class.java))
     }
 
     private lateinit var presenter: LoginContract.Presenter

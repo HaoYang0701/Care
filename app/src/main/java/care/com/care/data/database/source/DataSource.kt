@@ -6,6 +6,7 @@ import care.com.care.Model.Token
 import care.com.care.Network.RegistrationRequest
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 
@@ -25,4 +26,6 @@ interface DataSource {
     fun getToken() : Flowable<Token>
 
     fun registerNewUser(request: RegistrationRequest): Observable<Response<RegistrationResponse>>
+
+    fun uploadImage(image : MultipartBody.Part)
 }

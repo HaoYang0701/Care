@@ -30,4 +30,10 @@
     <string name="enter_your_verification_code">Enter Your Verification Code</string>
     <string name="resend_verification_code">Resend verification code</string>
     <string name="verification_continue">Continue</string>
+    <string name="social_security_number">Social Security Number</string>
+    <string name="upload_driver_s_license">Upload Driver\'s License</string>
+    <string name="upload_state_id">Upload State ID</string>
+    <string name="upload_resume">Upload Resume</string>
+    <string name="upload_certificate">Upload Certificate</string>
+    <string name="disclaimer">Disclaimer</string>
 </resources>

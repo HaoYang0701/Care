@@ -26,11 +26,13 @@ import care.com.care.CareOffApplication
 import java.util.*
 import androidx.core.content.ContextCompat.getSystemService
 import android.telephony.TelephonyManager
-
-
+import okhttp3.MultipartBody
 
 
 object RemoteDataSource : DataSource {
+    override fun uploadImage(image: MultipartBody.Part) {
+
+    }
 
 
     private var apiEndpoint: ApiEndpoint
