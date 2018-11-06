@@ -1,19 +1,17 @@
-package care.com.careOff.Login
+package care.com.careOff.passwordreset
 
 import care.com.careOff.base.BasePresenter
 import care.com.careOff.base.BaseView
 
-interface LoginContract {
+interface PasswordResetContract {
 
     interface View : BaseView<Presenter> {
-        fun goToHomeScreen()
+        fun goToLoginScreen()
         fun goToWelcomeScreen()
-        fun goToForgotPasswordScreen()
     }
 
     interface Presenter : BasePresenter {
-        fun onLoginButtonClicked()
+        fun onResetButtonClicked()
         fun onCancelClicked()
-        fun onForgotPasswordClicked()
     }
 }

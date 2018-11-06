@@ -7,6 +7,10 @@ import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoUnit
 
 class RegistrationPresenter(val registrationView : RegistrationContract.View) : RegistrationContract.Presenter{
+    override fun LoginActionClicked() {
+        registrationView.goToLogin()
+    }
+
     var observable: RegistrationObservable
 
     override fun registerButtonClicked() {
@@ -59,7 +63,7 @@ class RegistrationPresenter(val registrationView : RegistrationContract.View) : 
         val stop = LocalDate.now( ZoneId.of( "America/Montreal" ) );
         val years = ChronoUnit.YEARS.between( start , stop )
 
-        if (years < 21) {
+        if (years < 18) {
             return null
         }
 

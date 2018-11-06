@@ -11,9 +11,15 @@ import care.com.careOff.R
 import care.com.careOff.databinding.RegistrationFragmentBinding
 import care.com.careOff.home.HomeActivity
 import android.widget.Toast
+import care.com.careOff.Login.LoginActivity
 import care.com.careOff.Login.twoFactorAuth.TwoFactorActivity
 
 class RegistrationFragment : RegistrationContract.View, Fragment(){
+
+    override fun goToLogin() {
+        startActivity(Intent(context, LoginActivity::class.java))
+    }
+
     override fun goToTwoFactor() {
         startActivity(Intent(context, TwoFactorActivity::class.java))
     }
@@ -82,6 +88,7 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
         val view : View = viewBinding.root
         viewBinding.presenter = this.presenter
         viewBinding.state = this.observable
+        viewBinding.logInAction.setOnClickListener{v -> presenter.LoginActionClicked()}
         return view
     }
 

@@ -1,19 +1,25 @@
-package care.com.careOff.Login
+package care.com.careOff.Login.welcome
 
 import care.com.careOff.base.BasePresenter
 import care.com.careOff.base.BaseView
 
-interface LoginContract {
+interface WelcomeContract {
 
     interface View : BaseView<Presenter> {
         fun goToHomeScreen()
-        fun goToWelcomeScreen()
-        fun goToForgotPasswordScreen()
+
+        fun goToRegistrationScreen()
+
+        fun goToSettings()
+
+        fun goToSignIn()
     }
 
     interface Presenter : BasePresenter {
         fun onLoginButtonClicked()
-        fun onCancelClicked()
-        fun onForgotPasswordClicked()
+
+        fun onRegistrationClicked()
+
+        fun onFabClicked()
     }
 }

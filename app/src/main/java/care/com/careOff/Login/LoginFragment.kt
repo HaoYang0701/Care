@@ -2,23 +2,27 @@ package care.com.careOff.Login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import care.com.careOff.Login.welcome.WelcomeActivity
 import care.com.careOff.R
-import care.com.careOff.registration.RegistrationActivity
 import care.com.careOff.databinding.LoginFragmentBinding
-import care.com.careOff.documentupload.DocumentUploadActivity
-
+import care.com.careOff.home.HomeActivity
+import care.com.careOff.passwordreset.PasswordResetActivity
 
 class LoginFragment : LoginContract.View, Fragment() {
-    override fun goToSettings() {
-        startActivity(Intent(context, DocumentUploadActivity::class.java))
+    override fun goToForgotPasswordScreen() {
+        startActivity(Intent(context, PasswordResetActivity::class.java))
     }
 
-    private lateinit var presenter: LoginContract.Presenter
+    override fun goToWelcomeScreen() {
+        startActivity(Intent(context, WelcomeActivity::class.java))
+    }
+
+    private lateinit var presenter : LoginContract.Presenter
     private lateinit var viewBinding : LoginFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,38 +33,22 @@ class LoginFragment : LoginContract.View, Fragment() {
     }
 
     private fun setUpClickListeners() {
-        viewBinding.loginButton.setOnClickListener { presenter.onLoginButtonClicked() }
-        viewBinding.registerButton.setOnClickListener { presenter.onRegistrationClicked() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.subscribe()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        presenter.unsubscribe()
+        viewBinding.loginButton.setOnClickListener{v -> presenter.onLoginButtonClicked()}
+        viewBinding.cancelAction.setOnClickListener{v -> presenter.onCancelClicked()}
+        viewBinding.forgotPasswordAction.setOnClickListener{v -> presenter.onForgotPasswordClicked()}
     }
 
     override fun setPresenter(presenter: LoginContract.Presenter) {
         this.presenter = presenter
     }
 
-
-    override fun goToRegistrationScreen() {
-        startActivity(Intent(context, RegistrationActivity::class.java))
-    }
-
     override fun goToHomeScreen() {
-
+       startActivity(Intent(context, HomeActivity::class.java))
     }
 
     companion object {
-        fun newInstance() : LoginFragment{
+        fun newInstance() : LoginFragment {
             return LoginFragment()
         }
     }
-
-
 }

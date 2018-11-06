@@ -16,7 +16,7 @@
     <string name="log_in">Log In</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="forgot_your_password">Forgot Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="email">Email</string>
     <string name="confirm_password">Confirm Password</string>
@@ -27,7 +27,8 @@
     <string name="zipcode">Zipcode</string>
     <string name="age">Age</string>
     <string name="date_of_birth">Date Of Birth</string>
-    <string name="enter_your_verification_code">Enter Your Verification Code</string>
+    <string name="confirm_your_identity">Confirm your identity</string>
+    <string name="enter_code">Enter the code sent to your phone number ending in %s</string>
     <string name="resend_verification_code">Resend verification code</string>
     <string name="verification_continue">Continue</string>
     <string name="social_security_number">Social Security Number</string>
@@ -36,4 +37,9 @@
     <string name="upload_resume">Upload Resume</string>
     <string name="upload_certificate">Upload Certificate</string>
     <string name="disclaimer">Disclaimer</string>
+    <string name="sign_in">Sign In</string>
+    <string name="send_reminder">Send Reminder</string>
+    <string name="cancel">Cancel</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log In!</string>
 </resources>

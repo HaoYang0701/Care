@@ -1,9 +1,12 @@
 package care.com.careOff.Login
 
 class LoginPresenter(val loginView: LoginContract.View) : LoginContract.Presenter {
+    override fun onForgotPasswordClicked() {
+        loginView.goToForgotPasswordScreen()
+    }
 
-    override fun onFabClicked() {
-        loginView.goToSettings()
+    override fun onCancelClicked() {
+        loginView.goToWelcomeScreen()
     }
 
     init {
@@ -15,10 +18,6 @@ class LoginPresenter(val loginView: LoginContract.View) : LoginContract.Presente
 
     override fun unsubscribe() {
 
-    }
-
-    override fun onRegistrationClicked() {
-        loginView.goToRegistrationScreen()
     }
 
     override fun onLoginButtonClicked() {

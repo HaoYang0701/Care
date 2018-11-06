@@ -29,9 +29,12 @@ interface RegistrationContract {
         fun setObservable(observable: RegistrationObservable)
 
         fun showToast(@StringRes stringRes: String)
+
+        fun goToLogin()
     }
 
     interface Presenter : BasePresenter {
         fun registerButtonClicked()
+        fun LoginActionClicked()
     }
 }

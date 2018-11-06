@@ -4,13 +4,35 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/primary"
+              android:background="@drawable/background"
     android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_horizontal"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter_your_verification_code"
+        android:textColor="@color/accent"
+        android:textSize="30sp"
+        android:text="@string/confirm_your_identity"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/accent"
+        android:textSize="15sp"
+        android:layout_margin="15dp"
+        android:text="@string/enter_code"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_verification_code"
         android:gravity="center"/>
 
     <com.alimuzaffar.lib.pin.PinEntryEditText
@@ -27,18 +49,14 @@
         android:textSize="20sp"
         android:layoutDirection="ltr"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/resend_verification_code"
-        android:gravity="center"/>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:id="@+id/pin_entry_button"
         android:text="@string/verification_continue"
+        android:backgroundTint="@color/accent"
+        android:textColor="@color/text_color"
         android:gravity="center"/>
 
 </LinearLayout>
