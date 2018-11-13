@@ -1,17 +1,28 @@
 package care.com.careOff.data.database.source.local
 
-import care.com.careOff.Model.DocumentUploadUrlResponse
-import care.com.careOff.Model.Job
-import care.com.careOff.Model.RegistrationResponse
-import care.com.careOff.Model.Token
+import care.com.careOff.Model.*
 import care.com.careOff.Network.DocumentUploadUrlRequest
+import care.com.careOff.Network.PushTokenUpdateRequest
 import care.com.careOff.Network.RegistrationRequest
+import care.com.careOff.Network.VerifyOTPRequest
 import care.com.careOff.data.database.source.DataSource
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.Response
 
 class LocalDataSource(val localDao : LocalDao) : DataSource {
+    override fun verifyOTP(body: VerifyOTPRequest): Observable<VerifyOTPResponse> {
+        return Observable.empty()
+    }
+
+    override fun sendOTP(): Observable<SendOTPResponse> {
+        return Observable.empty()
+    }
+
+    override fun updateFirebaseToken(body: PushTokenUpdateRequest): Observable<PushTokenUpdateResponse> {
+        return Observable.empty()
+    }
+
     override fun uploadImage(body : DocumentUploadUrlRequest): Observable<DocumentUploadUrlResponse> {
         return Observable.empty()
     }

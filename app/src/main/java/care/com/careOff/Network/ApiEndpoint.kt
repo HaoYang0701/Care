@@ -1,12 +1,11 @@
 package care.com.careOff.Network
 
-import care.com.careOff.Model.DocumentUploadUrlResponse
-import care.com.careOff.Model.RegistrationResponse
-import care.com.careOff.Model.Token
+import care.com.careOff.Model.*
 import io.reactivex.Observable
 import retrofit2.Response
 import okhttp3.MultipartBody
 import retrofit2.http.*
+import retrofit2.http.Body
 
 
 interface ApiEndpoint {
@@ -24,4 +23,15 @@ interface ApiEndpoint {
     @POST("/it/document/documentuploadurl")
     fun getImageURL(@Body body : DocumentUploadUrlRequest): Observable<DocumentUploadUrlResponse>
 
+    @POST("/it/users/firebasetoken")
+    fun sendNewDeviceToken(@Body body : PushTokenUpdateRequest, @Header("x-access-token") accessToken : String,
+                           @Header("x-id") xID : String) : Observable<PushTokenUpdateResponse>
+
+    @POST("it/users/sendPhoneOtp")
+    fun sendOTP(@Header("x-access-token") accessToken : String,
+                @Header("x-id") xID : String) : Observable<SendOTPResponse>
+
+    @POST("it/users/verifyPhoneOtp")
+    fun verifyOTP(@Body body : VerifyOTPRequest, @Header("x-access-token") accessToken : String,
+                  @Header("x-id") xID : String) : Observable<VerifyOTPResponse>
 }

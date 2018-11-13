@@ -2,11 +2,6 @@ package care.com.careOff.data.database.source.remote
 
 import android.content.Context
 import android.os.Build
-import care.com.careOff.Model.Job
-import care.com.careOff.Model.RegistrationResponse
-import care.com.careOff.Model.Token
-import care.com.careOff.Network.ApiEndpoint
-import care.com.careOff.Network.RegistrationRequest
 import care.com.careOff.data.database.source.DataSource
 import com.google.gson.GsonBuilder
 import io.reactivex.BackpressureStrategy
@@ -25,11 +20,23 @@ import androidx.preference.PreferenceManager
 import care.com.careOff.CareOffApplication
 import java.util.*
 import android.telephony.TelephonyManager
-import care.com.careOff.Model.DocumentUploadUrlResponse
-import care.com.careOff.Network.DocumentUploadUrlRequest
+import care.com.careOff.Model.*
+import care.com.careOff.Network.*
 
 
 object RemoteDataSource : DataSource {
+
+    override fun verifyOTP(body: VerifyOTPRequest): Observable<VerifyOTPResponse> {
+        apiEndpoint.verifyOTP(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun sendOTP(): Observable<SendOTPResponse> {
+        apiEndpoint.sendOTP().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun updateFirebaseToken(body: PushTokenUpdateRequest): Observable<PushTokenUpdateResponse> {
+        return apiEndpoint.sendNewDeviceToken(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
 
     override fun uploadImage(body : DocumentUploadUrlRequest) : Observable<DocumentUploadUrlResponse>{
         return apiEndpoint.getImageURL(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
