@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="care.com.careOff.Login.welcome.WelcomeActivity"
+        <activity android:name="care.com.careOff.login.welcome.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
@@ -44,12 +44,12 @@
         </activity>
 
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         </activity>
 
         <activity
-            android:name="care.com.careOff.Login.twoFactorAuth.TwoFactorActivity"
+            android:name="care.com.careOff.login.twoFactorAuth.TwoFactorActivity"
             android:theme="@style/AppTheme"/>
 
         <activity

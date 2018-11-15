@@ -11,8 +11,8 @@ import care.com.careOff.R
 import care.com.careOff.databinding.RegistrationFragmentBinding
 import care.com.careOff.home.HomeActivity
 import android.widget.Toast
-import care.com.careOff.Login.LoginActivity
-import care.com.careOff.Login.twoFactorAuth.TwoFactorActivity
+import care.com.careOff.login.LoginActivity
+import care.com.careOff.login.twoFactorAuth.TwoFactorActivity
 
 class RegistrationFragment : RegistrationContract.View, Fragment(){
 
@@ -66,10 +66,6 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
     override fun goToHomeScreen() {
         startActivity(Intent(context, HomeActivity::class.java))
     }
-
-
-
-
 
     private lateinit var presenter: RegistrationContract.Presenter
     private lateinit var viewBinding : RegistrationFragmentBinding

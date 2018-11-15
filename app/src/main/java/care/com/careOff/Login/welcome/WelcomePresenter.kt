@@ -1,6 +1,4 @@
-package care.com.careOff.Login.welcome
-
-import care.com.careOff.Login.welcome.WelcomeContract
+package care.com.careOff.login.welcome
 
 class WelcomePresenter(val welcomeView: WelcomeContract.View) : WelcomeContract.Presenter {
 

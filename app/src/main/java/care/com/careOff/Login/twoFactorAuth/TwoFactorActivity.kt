@@ -1,4 +1,4 @@
-package care.com.careOff.Login.twoFactorAuth
+package care.com.careOff.login.twoFactorAuth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import care.com.careOff.Login.LoginActivity
-import care.com.careOff.Login.welcome.WelcomeActivity
+import care.com.careOff.login.LoginActivity
+import care.com.careOff.login.welcome.WelcomeActivity
 import care.com.careOff.R
 import care.com.careOff.databinding.PasswordResetFragmentBinding
 

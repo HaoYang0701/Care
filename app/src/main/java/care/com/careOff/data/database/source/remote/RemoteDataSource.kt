@@ -2,9 +2,6 @@ package care.com.careOff.data.database.source.remote
 
 import android.content.Context
 import android.os.Build
-import care.com.careOff.Model.Job
-import care.com.careOff.Model.RegistrationResponse
-import care.com.careOff.Model.Token
 import care.com.careOff.Network.ApiEndpoint
 import care.com.careOff.Network.RegistrationRequest
 import care.com.careOff.data.database.source.DataSource
@@ -21,15 +18,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
-import androidx.preference.PreferenceManager
 import care.com.careOff.CareOffApplication
 import java.util.*
 import android.telephony.TelephonyManager
-import care.com.careOff.Model.DocumentUploadUrlResponse
+import care.com.careOff.Model.*
 import care.com.careOff.Network.DocumentUploadUrlRequest
+import care.com.careOff.Network.LoginRequest
 
 
 object RemoteDataSource : DataSource {
+    override fun logIn(body: LoginRequest): Observable<Response<LoginResponse>> {
+        return apiEndpoint.logIn(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
 
     override fun uploadImage(body : DocumentUploadUrlRequest) : Observable<DocumentUploadUrlResponse>{
         return apiEndpoint.getImageURL(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -49,7 +49,7 @@ object RemoteDataSource : DataSource {
 
         var uniqueID = ""
 
-        val sPrefs = PreferenceManager.getDefaultSharedPreferences(CareOffApplication.getAppContext())
+        val sPrefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(CareOffApplication.getAppContext())
         if (sPrefs.getString("key_uuid", null) != null) {
             uniqueID = sPrefs.getString("key_uuid", null)
         } else {

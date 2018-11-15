@@ -1,6 +1,7 @@
 package care.com.careOff.Network
 
 import care.com.careOff.Model.DocumentUploadUrlResponse
+import care.com.careOff.Model.LoginResponse
 import care.com.careOff.Model.RegistrationResponse
 import care.com.careOff.Model.Token
 import io.reactivex.Observable
@@ -24,4 +25,6 @@ interface ApiEndpoint {
     @POST("/it/document/documentuploadurl")
     fun getImageURL(@Body body : DocumentUploadUrlRequest): Observable<DocumentUploadUrlResponse>
 
+    @POST("/it/users/Login")
+    fun logIn(@Body body : LoginRequest) : Observable<Response<LoginResponse>>
 }

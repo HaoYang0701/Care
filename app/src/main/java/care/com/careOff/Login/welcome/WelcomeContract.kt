@@ -1,4 +1,4 @@
-package care.com.careOff.Login.welcome
+package care.com.careOff.login.welcome
 
 import care.com.careOff.base.BasePresenter
 import care.com.careOff.base.BaseView

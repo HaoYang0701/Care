@@ -1,4 +1,4 @@
-package care.com.careOff.Login.twoFactorAuth
+package care.com.careOff.login.twoFactorAuth
 
 class TwoFactorPresenter(val twoFactorView: TwoFactorContract.View) : TwoFactorContract.Presenter {
 

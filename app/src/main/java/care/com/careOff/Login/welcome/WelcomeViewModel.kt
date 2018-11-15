@@ -1,7 +1,6 @@
-package care.com.careOff.Login.welcome
+package care.com.careOff.login.welcome
 
 import androidx.lifecycle.ViewModel
-import care.com.careOff.Login.welcome.WelcomeContract
 import care.com.careOff.base.BaseViewModel
 
 class WelcomeViewModel : BaseViewModel<WelcomeContract.Presenter>, ViewModel() {

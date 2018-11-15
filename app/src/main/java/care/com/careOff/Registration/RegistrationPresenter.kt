@@ -1,18 +1,29 @@
 package care.com.careOff.registration
 
+import android.annotation.SuppressLint
 import care.com.careOff.Network.RegistrationRequest
+import care.com.careOff.Utils.SharedPref
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoUnit
 
-class RegistrationPresenter(val registrationView : RegistrationContract.View) : RegistrationContract.Presenter{
+class RegistrationPresenter(val registrationView: RegistrationContract.View, val sharedPref: SharedPref) : RegistrationContract.Presenter{
+    var observable: RegistrationObservable
+
+    init {
+        registrationView.setPresenter(this)
+        observable = RegistrationObservable()
+        registrationView.setObservable(observable)
+    }
+
     override fun LoginActionClicked() {
         registrationView.goToLogin()
     }
 
-    var observable: RegistrationObservable
 
+
+    @SuppressLint("CheckResult")
     override fun registerButtonClicked() {
 
         val registrationRequest = RegistrationRequest()
@@ -42,7 +53,13 @@ class RegistrationPresenter(val registrationView : RegistrationContract.View) : 
             RemoteDataSource.registerNewUser(registrationRequest).subscribe(
                     { response ->
                         val accessToken = response.headers().get("x-access-token")
-                        System.out.println(accessToken)
+                        val xID = response.headers().get("x-id")
+                        if (accessToken != null) {
+                            sharedPref.update("x-access-token", accessToken)
+                        }
+                        if (xID != null) {
+                            sharedPref.update("x-id", xID)
+                        }
                         registrationView.goToHomeScreen()} ,
                     { error ->
                         observable.showRegistrationError = true
@@ -112,11 +129,6 @@ class RegistrationPresenter(val registrationView : RegistrationContract.View) : 
         return isValid
     }
 
-    init {
-        registrationView.setPresenter(this)
-        observable = RegistrationObservable()
-        registrationView.setObservable(observable)
-    }
 
     override fun unsubscribe() {
 

@@ -1,8 +1,9 @@
-package care.com.careOff.Login
+package care.com.careOff.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import care.com.careOff.R
+import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 
 
@@ -20,7 +21,7 @@ class LoginActivity : AppCompatActivity(){
             replaceFragmentInActivity(it, R.id.contentFrame)
         }
 
-        loginPresenter = LoginPresenter(loginFragment)
+        loginPresenter = LoginPresenter(loginFragment, SharedPref(this))
 
         loginFragment.setPresenter(loginPresenter)
     }

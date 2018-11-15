@@ -1,4 +1,4 @@
-package care.com.careOff.Login.welcome
+package care.com.careOff.login.welcome
 
 import android.annotation.TargetApi
 import android.os.Bundle

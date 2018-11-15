@@ -1,4 +1,4 @@
-package care.com.careOff.Login.twoFactorAuth
+package care.com.careOff.login.twoFactorAuth
 
 import care.com.careOff.base.BasePresenter
 import care.com.careOff.base.BaseView

@@ -3,6 +3,7 @@ package care.com.careOff.registration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import care.com.careOff.R
+import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 import com.jakewharton.threetenabp.AndroidThreeTen
 
@@ -17,6 +18,6 @@ class RegistrationActivity : AppCompatActivity() {
                 as RegistrationFragment? ?: RegistrationFragment.newInstance().also {
             replaceFragmentInActivity(it, R.id.contentFrame)
         }
-        presenter = RegistrationPresenter(registrationFragment)
+        presenter = RegistrationPresenter(registrationFragment, SharedPref(this))
     }
 }

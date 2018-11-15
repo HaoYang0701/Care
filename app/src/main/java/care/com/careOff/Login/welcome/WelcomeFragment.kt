@@ -1,4 +1,4 @@
-package care.com.careOff.Login.welcome
+package care.com.careOff.login.welcome
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import care.com.careOff.Login.LoginActivity
+import care.com.careOff.login.LoginActivity
 import care.com.careOff.R
 import care.com.careOff.databinding.WelcomeFragmentBinding
 import care.com.careOff.registration.RegistrationActivity

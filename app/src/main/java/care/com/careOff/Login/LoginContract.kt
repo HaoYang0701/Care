@@ -1,4 +1,4 @@
-package care.com.careOff.Login
+package care.com.careOff.login
 
 import care.com.careOff.base.BasePresenter
 import care.com.careOff.base.BaseView
@@ -9,6 +9,7 @@ interface LoginContract {
         fun goToHomeScreen()
         fun goToWelcomeScreen()
         fun goToForgotPasswordScreen()
+        fun setObservable(observable: LoginObservable)
     }
 
     interface Presenter : BasePresenter {
