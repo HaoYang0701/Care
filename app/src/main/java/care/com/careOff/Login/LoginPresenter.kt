@@ -1,9 +1,13 @@
 package care.com.careOff.login
 
 import android.annotation.SuppressLint
+import care.com.careOff.Model.PushTokenUpdateResponse
 import care.com.careOff.Network.LoginRequest
+import care.com.careOff.Network.PushTokenUpdateRequest
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.data.database.source.remote.RemoteDataSource
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPref) : LoginContract.Presenter {
     var loginObservable : LoginObservable
@@ -36,20 +40,48 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
 
         RemoteDataSource.logIn(loginRequest).subscribe(
                 { response ->
-                    val accessToken = response.headers().get("x-access-token")
-                    val xID = response.headers().get("x-id")
-                    if (accessToken != null) {
-                        sharedPref.update("x-access-token", accessToken)
-                    }
-                    if (xID != null) {
-                        sharedPref.update("x-id", xID)
-                    }
+                    if (response.isSuccessful) {
+                        val accessToken = response.headers().get("x-access-token")
+                        val xID = response.headers().get("x-id")
+                        if (accessToken != null) {
+                            sharedPref.update("x-access-token", accessToken)
+                        }
+                        if (xID != null) {
+                            sharedPref.update("x-id", xID)
+                        }
 
-                    loginView.goToHomeScreen()
+
+                        updateFirebaseTokens()
+                        loginView.goToOTPScreen()
+                    }
                 },
 
                 { error ->
 
                 })
+    }
+
+    private fun updateFirebaseTokens() {
+        val accessToken = sharedPref.fetch("x-access-token")
+        val xID = sharedPref.fetch("x-id")
+        val tokenRequest = PushTokenUpdateRequest(sharedPref.fetch("deviceToken"))
+
+        RemoteDataSource.updateFirebaseToken(tokenRequest, accessToken, xID).subscribe(object : Observer<PushTokenUpdateResponse> {
+            override fun onError(e: Throwable) {
+                System.out.println("Firebase" + e.message)
+            }
+
+            override fun onNext(t: PushTokenUpdateResponse) {
+                System.out.println("SUCCESS FIRE" + t.success)
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                System.out.println(d.isDisposed)
+            }
+
+            override fun onComplete() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
     }
 }

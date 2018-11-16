@@ -1,5 +1,6 @@
 package care.com.careOff.login.twoFactorAuth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import care.com.careOff.R
 import care.com.careOff.databinding.TwoFactorFragmentBinding
+import care.com.careOff.home.HomeActivity
 
 class TwoFactorFragment : TwoFactorContract.View, Fragment() {
+    override fun goToHomeScreen() {
+        startActivity(Intent(context, HomeActivity::class.java))
+    }
 
     private lateinit var presenter: TwoFactorContract.Presenter
     private lateinit var viewBinding: TwoFactorFragmentBinding
@@ -23,10 +28,15 @@ class TwoFactorFragment : TwoFactorContract.View, Fragment() {
 
     private fun setUpClickListeners() {
         viewBinding.pinEntryButton.setOnClickListener{v ->
-            System.out.println("PLEASE")
-            System.out.println(viewBinding.txtPinEntry.text)
+            presenter.verifyOTP(viewBinding.txtPinEntry.text.toString())
+        }
+        viewBinding.resendOtp.setOnClickListener{
+            presenter.resendOTP()
         }
     }
+
+
+
 
     override fun onResume() {
         super.onResume()

@@ -1,14 +1,17 @@
 package care.com.careOff.registration
 
 import android.annotation.SuppressLint
+import android.location.Geocoder
 import care.com.careOff.Network.RegistrationRequest
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoUnit
+import java.io.IOException
 
-class RegistrationPresenter(val registrationView: RegistrationContract.View, val sharedPref: SharedPref) : RegistrationContract.Presenter{
+
+class RegistrationPresenter(val registrationView: RegistrationContract.View, val sharedPref: SharedPref, val geocoder: Geocoder) : RegistrationContract.Presenter{
     var observable: RegistrationObservable
 
     init {
@@ -50,17 +53,34 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
         }
         registrationRequest.dob = date
 
-            RemoteDataSource.registerNewUser(registrationRequest).subscribe(
+
+        try {
+            val addresses = geocoder.getFromLocationName(registrationRequest.zip, 1)
+            if (addresses != null && !addresses.isEmpty()) {
+                val address = addresses[0]
+                // Use the address as needed
+                registrationRequest.latitude = address.latitude.toString()
+                registrationRequest.longitude = address.longitude.toString()
+            }
+        } catch (e: IOException) {
+            // handle exception
+        }
+
+
+
+        RemoteDataSource.registerNewUser(registrationRequest).subscribe(
                     { response ->
-                        val accessToken = response.headers().get("x-access-token")
-                        val xID = response.headers().get("x-id")
-                        if (accessToken != null) {
-                            sharedPref.update("x-access-token", accessToken)
-                        }
-                        if (xID != null) {
-                            sharedPref.update("x-id", xID)
-                        }
-                        registrationView.goToHomeScreen()} ,
+                        if (response.isSuccessful) {
+                            val accessToken = response.headers().get("x-access-token")
+                            val xID = response.headers().get("x-id")
+                            if (accessToken != null) {
+                                sharedPref.update("x-access-token", accessToken)
+                            }
+                            if (xID != null) {
+                                sharedPref.update("x-id", xID)
+                            }
+                            registrationView.goToHomeScreen()
+                        } } ,
                     { error ->
                         observable.showRegistrationError = true
                         registrationView.showToast(error.localizedMessage)

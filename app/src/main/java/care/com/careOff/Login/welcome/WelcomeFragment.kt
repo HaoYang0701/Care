@@ -10,11 +10,16 @@ import androidx.databinding.DataBindingUtil
 import care.com.careOff.login.LoginActivity
 import care.com.careOff.R
 import care.com.careOff.databinding.WelcomeFragmentBinding
+import care.com.careOff.debug.DebugActivity
 import care.com.careOff.registration.RegistrationActivity
 import care.com.careOff.documentupload.DocumentUploadActivity
 
 
 class WelcomeFragment : WelcomeContract.View, Fragment() {
+    override fun goToDebug() {
+        startActivity(Intent(context, DebugActivity::class.java))
+    }
+
     override fun goToSignIn() {
         startActivity(Intent(context, LoginActivity::class.java))
     }
@@ -36,6 +41,7 @@ class WelcomeFragment : WelcomeContract.View, Fragment() {
     private fun setUpClickListeners() {
         viewBinding.loginButton.setOnClickListener { presenter.onLoginButtonClicked() }
         viewBinding.registerButton.setOnClickListener { presenter.onRegistrationClicked() }
+        viewBinding.debugButton.setOnClickListener{presenter.onDebugClicked()}
     }
 
     override fun onResume() {

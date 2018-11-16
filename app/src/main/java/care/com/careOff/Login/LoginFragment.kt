@@ -11,6 +11,7 @@ import care.com.careOff.login.welcome.WelcomeActivity
 import care.com.careOff.R
 import care.com.careOff.databinding.LoginFragmentBinding
 import care.com.careOff.home.HomeActivity
+import care.com.careOff.login.twoFactorAuth.TwoFactorActivity
 import care.com.careOff.passwordreset.PasswordResetActivity
 
 class LoginFragment : LoginContract.View, Fragment() {
@@ -44,8 +45,8 @@ class LoginFragment : LoginContract.View, Fragment() {
         this.presenter = presenter
     }
 
-    override fun goToHomeScreen() {
-       startActivity(Intent(context, HomeActivity::class.java))
+    override fun goToOTPScreen() {
+       startActivity(Intent(context, TwoFactorActivity::class.java))
     }
 
     override fun setObservable(observable: LoginObservable) {

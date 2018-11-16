@@ -28,4 +28,11 @@ class RegistrationRequest {
     @Expose
     var zip: String = ""
 
+    @SerializedName("latitude")
+    @Expose
+    var latitude: String = ""
+    @SerializedName("longitude")
+    @Expose
+    var longitude: String = ""
+
 }

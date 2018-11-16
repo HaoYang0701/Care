@@ -3,6 +3,7 @@ package care.com.careOff.login.twoFactorAuth
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import care.com.careOff.R
+import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 
 class TwoFactorActivity : AppCompatActivity(){
@@ -18,7 +19,7 @@ class TwoFactorActivity : AppCompatActivity(){
             replaceFragmentInActivity(it, R.id.contentFrame)
         }
 
-        twoFactorPresenter = TwoFactorPresenter(twoFactorFragment)
+        twoFactorPresenter = TwoFactorPresenter(twoFactorFragment, SharedPref(this))
 
         twoFactorFragment.setPresenter(twoFactorPresenter)
     }

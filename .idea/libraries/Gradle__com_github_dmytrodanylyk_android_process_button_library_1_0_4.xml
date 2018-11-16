@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.dmytrodanylyk.android-process-button:library-1.0.4">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.0.4.aar/961301693a8e8fbbaab95d0a08f98fba/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.0.4.aar/961301693a8e8fbbaab95d0a08f98fba/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.0.4.aar/32813043e2cca9d5f8847a24a7ecf38e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.0.4.aar/32813043e2cca9d5f8847a24a7ecf38e/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

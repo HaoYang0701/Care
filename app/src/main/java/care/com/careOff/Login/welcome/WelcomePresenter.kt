@@ -1,6 +1,9 @@
 package care.com.careOff.login.welcome
 
 class WelcomePresenter(val welcomeView: WelcomeContract.View) : WelcomeContract.Presenter {
+    override fun onDebugClicked() {
+        welcomeView.goToDebug()
+    }
 
     override fun onFabClicked() {
         welcomeView.goToSettings()

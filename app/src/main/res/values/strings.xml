@@ -42,4 +42,7 @@
     <string name="cancel">Cancel</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="already_have_an_account_log_in">Already have an account? Log In!</string>
+
+    <string name="notification_channel_name">CareOff Notification</string>
+    <string name="notification_channel_des">CareOff Notification Description</string>
 </resources>

@@ -3,7 +3,9 @@ package care.com.careOff.data.database.source
 import care.com.careOff.Model.*
 import care.com.careOff.Network.DocumentUploadUrlRequest
 import care.com.careOff.Network.LoginRequest
+import care.com.careOff.Network.PushTokenUpdateRequest
 import care.com.careOff.Network.RegistrationRequest
+import care.com.careOff.Network.VerifyOTPRequest
 import care.com.careOff.data.database.source.local.LocalDataSource
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import io.reactivex.Flowable
@@ -12,8 +14,21 @@ import retrofit2.Response
 
 class Repository(val remoteDataSource : RemoteDataSource, val localDataSource: LocalDataSource) : DataSource {
 
+
     override fun logIn(body: LoginRequest): Observable<Response<LoginResponse>> {
         return remoteDataSource.logIn(body)
+    }
+
+    override fun verifyOTP(body: VerifyOTPRequest, accessToken : String, xID : String): Observable<VerifyOTPResponse> {
+        return Observable.empty()
+    }
+
+    override fun sendOTP(headermap : Map<String, String>): Observable<SendOTPResponse> {
+        return Observable.empty()
+    }
+
+    override fun updateFirebaseToken(body: PushTokenUpdateRequest, accessToken : String, xID : String): Observable<PushTokenUpdateResponse> {
+        return Observable.empty()
     }
 
     override fun uploadImage(body : DocumentUploadUrlRequest): Observable<DocumentUploadUrlResponse> {

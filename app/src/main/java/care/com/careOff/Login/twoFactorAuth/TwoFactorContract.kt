@@ -5,8 +5,12 @@ import care.com.careOff.base.BaseView
 
 interface TwoFactorContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+        fun goToHomeScreen()
+    }
 
     interface Presenter : BasePresenter {
+        fun resendOTP()
+        fun verifyOTP(otpPin : String)
     }
 }

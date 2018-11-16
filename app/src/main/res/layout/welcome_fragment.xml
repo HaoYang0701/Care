@@ -8,6 +8,16 @@
               android:layout_height="match_parent"
               android:background="@drawable/background">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/debug_button"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/accent"
+        android:text="Debug Screen"
+        android:textColor="@color/text_color"/>
+
     <ImageView
         android:id="@+id/logo_image_view"
         android:layout_width="match_parent"

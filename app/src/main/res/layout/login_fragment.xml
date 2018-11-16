@@ -21,7 +21,9 @@
             android:id="@+id/logo_image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="121dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginEnd="84dp"
             android:src="@drawable/logo_horizontal"/>
 
         <TextView
@@ -32,7 +34,7 @@
             android:textColor="@color/accent"
             android:textSize="36sp"
             android:id="@+id/sign_in_text"
-            android:layout_marginTop="126dp"
+            android:layout_marginTop="216dp"
             android:layout_marginBottom="50dp"
             android:layout_below="@id/logo_image_view"/>
 
@@ -73,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={state.password}"
+                android:inputType="textPassword"
                 android:hint="@string/password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,6 +88,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/accent"
             android:text="@string/log_in"
             android:layout_below="@+id/login_layout"
@@ -98,27 +102,27 @@
             android:layout_marginLeft="40dp"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/accent"
-                android:background="@null"
-                android:textSize="12sp"
+                android:background="#00FFFFFF"
+                android:textSize="14sp"
                 android:gravity="start"
                 android:id="@+id/cancel_action"
                 android:layout_weight="1"
                 android:text="@string/cancel"/>
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:layout_weight="1"
-                android:backgroundTint="@null"
+                android:background="#00FFFFFF"
                 android:text="@string/forgot_password"
                 android:textColor="@color/accent"
                 android:id="@+id/forgot_password_action"
-                android:textSize="12sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

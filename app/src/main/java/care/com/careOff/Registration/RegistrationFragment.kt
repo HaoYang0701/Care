@@ -18,10 +18,14 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
 
     override fun goToLogin() {
         startActivity(Intent(context, LoginActivity::class.java))
+        activity?.finish()
+        return
     }
 
     override fun goToTwoFactor() {
         startActivity(Intent(context, TwoFactorActivity::class.java))
+        activity?.finish()
+        return
     }
 
 
@@ -65,6 +69,8 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
 
     override fun goToHomeScreen() {
         startActivity(Intent(context, HomeActivity::class.java))
+        activity?.finish()
+        return
     }
 
     private lateinit var presenter: RegistrationContract.Presenter

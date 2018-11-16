@@ -1,14 +1,14 @@
 package care.com.careOff.Utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 
-class SharedPref(val activity: Activity) {
+class SharedPref(val context: Context) {
         var sharedPref : SharedPreferences
 
         init {
-           sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
+           sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         }
 
         fun update(key : String, value : String) {
@@ -18,8 +18,8 @@ class SharedPref(val activity: Activity) {
             }
         }
 
-        fun fetch(key: String) : String? {
-            return  sharedPref.getString(key, null)
+        fun fetch(key: String) : String {
+            return  sharedPref.getString(key, "")
         }
 
 }

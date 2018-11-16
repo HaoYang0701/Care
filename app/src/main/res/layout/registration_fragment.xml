@@ -20,7 +20,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="121dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginLeft="84dp"
+            android:layout_marginRight="84dp"
             android:src="@drawable/logo_horizontal"/>
     <TextView
         android:layout_width="match_parent"
@@ -72,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.password}"
+                    android:inputType="textPassword"
                     android:hint="@string/password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -90,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.confirmPassword}"
+                    android:inputType="textPassword"
                     android:hint="@string/confirm_password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -186,7 +190,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 app:errorEnabled="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/textInputLayoutZipCode"
                 android:layout_gravity="center">
 
@@ -223,15 +227,15 @@
                 android:onClick="@{() -> presenter.registerButtonClicked()}"
                 android:text="@string/sign_up"/>
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@null"
                 android:textColor="@color/accent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:background="#00FFFFFF"
                 android:textSize="12sp"
                 android:id="@+id/log_in_action"
                 android:text="@string/already_have_an_account_log_in"/>

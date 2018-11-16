@@ -13,12 +13,16 @@ interface WelcomeContract {
         fun goToSettings()
 
         fun goToSignIn()
+
+        fun goToDebug()
     }
 
     interface Presenter : BasePresenter {
         fun onLoginButtonClicked()
 
         fun onRegistrationClicked()
+
+        fun onDebugClicked()
 
         fun onFabClicked()
     }

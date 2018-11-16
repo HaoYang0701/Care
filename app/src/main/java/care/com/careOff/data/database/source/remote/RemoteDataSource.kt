@@ -2,6 +2,7 @@ package care.com.careOff.data.database.source.remote
 
 import android.content.Context
 import android.os.Build
+import android.preference.PreferenceManager
 import care.com.careOff.Network.ApiEndpoint
 import care.com.careOff.Network.RegistrationRequest
 import care.com.careOff.data.database.source.DataSource
@@ -18,17 +19,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
-import care.com.careOff.CareOffApplication
 import java.util.*
 import android.telephony.TelephonyManager
 import care.com.careOff.Model.*
 import care.com.careOff.Network.DocumentUploadUrlRequest
 import care.com.careOff.Network.LoginRequest
+import care.com.careOff.Network.*
 
 
 object RemoteDataSource : DataSource {
     override fun logIn(body: LoginRequest): Observable<Response<LoginResponse>> {
         return apiEndpoint.logIn(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun verifyOTP(body: VerifyOTPRequest, accessToken : String, xID : String): Observable<VerifyOTPResponse> {
+        return apiEndpoint.verifyOTP(body, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun sendOTP(headermap : Map<String, String>): Observable<SendOTPResponse> {
+        return apiEndpoint.sendOTP(headermap).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun updateFirebaseToken(body: PushTokenUpdateRequest, accessToken : String, xID : String): Observable<PushTokenUpdateResponse> {
+        return apiEndpoint.sendNewDeviceToken(body, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun uploadImage(body : DocumentUploadUrlRequest) : Observable<DocumentUploadUrlResponse>{
@@ -39,7 +52,7 @@ object RemoteDataSource : DataSource {
     private var apiEndpoint: ApiEndpoint
 
     init {
-        val BASE_URL = "https://xnzc2oa2a1.execute-api.us-east-1.amazonaws.com"
+        val BASE_URL = "https://6y0igywewb.execute-api.us-east-1.amazonaws.com"
         val gson = GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create()
@@ -49,23 +62,22 @@ object RemoteDataSource : DataSource {
 
         var uniqueID = ""
 
-        val sPrefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(CareOffApplication.getAppContext())
-        if (sPrefs.getString("key_uuid", null) != null) {
-            uniqueID = sPrefs.getString("key_uuid", null)
-        } else {
-            uniqueID = UUID.randomUUID().toString()
-            val editor = sPrefs.edit()
-            editor.putString("key_uuid", uniqueID)
-            editor.commit()
-        }
+//        val sPrefs = PreferenceManager.getDefaultSharedPreferences()
+//        if (sPrefs.getString("key_uuid", null) != null) {
+//            uniqueID = sPrefs.getString("key_uuid", null)
+//        } else {
+//            uniqueID = UUID.randomUUID().toString()
+//            val editor = sPrefs.edit()
+//            editor.putString("key_uuid", uniqueID)
+//            editor.commit()
+//        }
 
 
-        val deviceInfo = getDeviceInfo()
+        val deviceInfo = ""//getDeviceInfo()
 
         val headerInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
                     .addHeader("DeviceInfo", deviceInfo)
-                    .addHeader("x-access-token", "")
                     .addHeader("ClientID", uniqueID).build()
             chain.proceed(request)
         }
@@ -83,22 +95,22 @@ object RemoteDataSource : DataSource {
         apiEndpoint = retrofit.create(ApiEndpoint::class.java)
     }
 
-    private fun getDeviceInfo(): String {
-        val telephonyManager = CareOffApplication.getAppContext()?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        val simOperatorName = telephonyManager.simOperatorName
-
-        val stringBuilder = StringBuilder()
-        stringBuilder.apply {
-            append(Build.BRAND)
-            append(" ")
-            append(Build.MODEL)
-            append(" ")
-            append(Build.VERSION.SDK_INT)
-            append(" ")
-            append(simOperatorName)
-        }
-        return stringBuilder.toString()
-    }
+//    private fun getDeviceInfo(): String {
+//        val telephonyManager = CareOffApplication.getAppContext()?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+//        val simOperatorName = telephonyManager.simOperatorName
+//
+//        val stringBuilder = StringBuilder()
+//        stringBuilder.apply {
+//            append(Build.BRAND)
+//            append(" ")
+//            append(Build.MODEL)
+//            append(" ")
+//            append(Build.VERSION.SDK_INT)
+//            append(" ")
+//            append(simOperatorName)
+//        }
+//        return stringBuilder.toString()
+//    }
 
 
     override fun deleteJob(jobID: String) {
