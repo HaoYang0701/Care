@@ -32,7 +32,7 @@ interface ApiEndpoint {
 
     @POST("/dev/users/firebasetoken")
     fun sendNewDeviceToken(@Body body : PushTokenUpdateRequest, @Header("x-access-token") accessToken : String,
-                           @Header("x-id") xID : String) : Observable<PushTokenUpdateResponse>
+                           @Header("x-user-id") xID : String) : Observable<PushTokenUpdateResponse>
 
     @POST("/dev/users/sendPhoneOtp")
     fun sendOTP(@HeaderMap headerMap: Map<String, String>) : Observable<SendOTPResponse>

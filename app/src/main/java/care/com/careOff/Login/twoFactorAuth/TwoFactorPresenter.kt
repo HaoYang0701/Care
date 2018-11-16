@@ -14,6 +14,8 @@ class TwoFactorPresenter(val twoFactorView: TwoFactorContract.View, val sharedPr
     init {
         accessToken = sharedPref.fetch("x-access-token")
         xID = sharedPref.fetch("x-id")
+        twoFactorView.setPresenter(this)
+        resendOTP()
     }
 
     override fun verifyOTP(otpPin : String) {
@@ -47,10 +49,6 @@ class TwoFactorPresenter(val twoFactorView: TwoFactorContract.View, val sharedPr
             }
 
         })
-    }
-
-    init {
-        twoFactorView.setPresenter(this)
     }
 
     override fun subscribe() {

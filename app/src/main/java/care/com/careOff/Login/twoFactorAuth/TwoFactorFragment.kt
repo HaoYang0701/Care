@@ -35,9 +35,6 @@ class TwoFactorFragment : TwoFactorContract.View, Fragment() {
         }
     }
 
-
-
-
     override fun onResume() {
         super.onResume()
         presenter.subscribe()
