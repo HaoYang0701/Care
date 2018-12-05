@@ -10,6 +10,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPref) : LoginContract.Presenter {
+
     var loginObservable : LoginObservable
 
     init {
@@ -52,7 +53,6 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
 
 
                         updateFirebaseTokens()
-                        loginView.goToOTPScreen()
                     }
                 },
 
@@ -73,6 +73,7 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
 
             override fun onNext(t: PushTokenUpdateResponse) {
                 System.out.println("SUCCESS FIRE" + t.success)
+                loginView.goToOTPScreen()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -80,7 +81,6 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
             }
 
             override fun onComplete() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
     }

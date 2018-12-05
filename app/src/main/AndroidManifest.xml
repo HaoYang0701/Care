@@ -79,6 +79,7 @@
         <activity android:name=".debug.DebugActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity android:name="care.com.CareOffAppCompatActivity"/>
 
         <service android:name="care.com.careOff.Service.UserLocationService" />
         <service android:name="care.com.careOff.Service.CareOffMessagingService">

@@ -2,10 +2,11 @@ package care.com.careOff.shift
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
 import care.com.careOff.Utils.replaceFragmentInActivity
 
-class ShiftActivity : AppCompatActivity() {
+class ShiftActivity : CareOffAppCompatActivity() {
     private lateinit var presenter: ShiftPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

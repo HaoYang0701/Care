@@ -8,6 +8,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 class TwoFactorPresenter(val twoFactorView: TwoFactorContract.View, val sharedPref: SharedPref) : TwoFactorContract.Presenter {
+
     lateinit var accessToken : String
     lateinit var xID : String
 

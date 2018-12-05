@@ -11,9 +11,10 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import android.os.Build
+import care.com.CareOffAppCompatActivity
 
 
-class WelcomeActivity : AppCompatActivity(){
+class WelcomeActivity : CareOffAppCompatActivity(){
 
     private lateinit var welcomePresenter: WelcomePresenter
     private var mFirebaseAnalytics: FirebaseAnalytics? = null

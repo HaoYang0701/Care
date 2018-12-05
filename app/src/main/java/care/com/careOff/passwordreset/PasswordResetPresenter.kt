@@ -1,6 +1,7 @@
 package care.com.careOff.passwordreset
 
 class PasswordResetPresenter(val passwordResetView: PasswordResetContract.View) : PasswordResetContract.Presenter {
+
     override fun onCancelClicked() {
         passwordResetView.goToWelcomeScreen()
     }

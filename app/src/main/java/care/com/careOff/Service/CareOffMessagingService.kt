@@ -30,6 +30,7 @@ class CareOffMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
+        remoteMessage
         if (remoteMessage?.data != null && remoteMessage?.data.isNotEmpty()) {
             Log.d("MESSAGE", "Message data payload: " + remoteMessage.data)
             createPushNotification(remoteMessage.data.get("value"))
@@ -39,6 +40,8 @@ class CareOffMessagingService : FirebaseMessagingService() {
     private fun createPushNotification(string: String?) {
         val random = Random().nextInt()
         val intent = Intent(applicationContext, HomeActivity::class.java)
+        intent.putExtra("screen", "debugScreen")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
 
         var mBuilder = NotificationCompat.Builder(this, "default")

@@ -3,10 +3,11 @@ package care.com.careOff.documentupload
 import android.os.Bundle
 import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
+import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
 import care.com.careOff.Utils.replaceFragmentInActivity
 
-class DocumentUploadActivity : AppCompatActivity(){
+class DocumentUploadActivity : CareOffAppCompatActivity(){
 
     private lateinit var documentUploadPresenter: DocumentUploadPresenter
 

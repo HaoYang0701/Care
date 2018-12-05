@@ -24,15 +24,15 @@ class RegistrationRequest {
     @SerializedName("password")
     @Expose
     var password: String = ""
-    @SerializedName("zip")
+    @SerializedName("postal_code")
     @Expose
     var zip: String = ""
 
     @SerializedName("latitude")
     @Expose
-    var latitude: String = ""
+    var latitude: Double = 0.0
     @SerializedName("longitude")
     @Expose
-    var longitude: String = ""
+    var longitude: Double = 0.0
 
 }

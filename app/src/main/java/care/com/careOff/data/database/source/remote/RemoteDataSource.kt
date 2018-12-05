@@ -52,7 +52,7 @@ object RemoteDataSource : DataSource {
     private var apiEndpoint: ApiEndpoint
 
     init {
-        val BASE_URL = "https://6y0igywewb.execute-api.us-east-1.amazonaws.com"
+        val BASE_URL = "https://oix65g6mn2.execute-api.us-east-1.amazonaws.com"
         val gson = GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create()

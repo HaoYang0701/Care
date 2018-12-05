@@ -59,8 +59,8 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
             if (addresses != null && !addresses.isEmpty()) {
                 val address = addresses[0]
                 // Use the address as needed
-                registrationRequest.latitude = address.latitude.toString()
-                registrationRequest.longitude = address.longitude.toString()
+                registrationRequest.latitude = address.latitude
+                registrationRequest.longitude = address.longitude
             }
         } catch (e: IOException) {
             // handle exception

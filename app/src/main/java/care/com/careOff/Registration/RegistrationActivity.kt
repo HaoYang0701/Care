@@ -3,13 +3,14 @@ package care.com.careOff.registration
 import android.location.Geocoder
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.*
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : CareOffAppCompatActivity() {
     private lateinit var presenter: RegistrationPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

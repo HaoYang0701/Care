@@ -2,10 +2,11 @@ package care.com.careOff.passwordreset
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
 import care.com.careOff.Utils.replaceFragmentInActivity
 
-class PasswordResetActivity : AppCompatActivity(){
+class PasswordResetActivity : CareOffAppCompatActivity(){
 
     private lateinit var passwordResetPresenter: PasswordResetPresenter
 

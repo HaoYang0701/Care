@@ -2,11 +2,12 @@ package care.com.careOff.login.twoFactorAuth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 
-class TwoFactorActivity : AppCompatActivity(){
+class TwoFactorActivity : CareOffAppCompatActivity(){
 
     private lateinit var twoFactorPresenter : TwoFactorPresenter
 
