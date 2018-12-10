@@ -55,6 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.email}"
+                    android:id="@+id/edit_email"
+                    android:maxLines="1"
                     android:hint="@string/email"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -75,6 +77,8 @@
                     android:layout_height="wrap_content"
                     android:text="@={state.password}"
                     android:inputType="textPassword"
+                    android:id="@+id/edit_password"
+                    android:maxLines="1"
                     android:hint="@string/password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +98,8 @@
                     android:layout_height="wrap_content"
                     android:text="@={state.confirmPassword}"
                     android:inputType="textPassword"
+                    android:id="@+id/edit_confirm_password"
+                    android:maxLines="1"
                     android:hint="@string/confirm_password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -112,6 +118,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.firstName}"
+                    android:id="@+id/edit_first_name"
+                    android:maxLines="1"
                     android:hint="@string/first_name"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -130,6 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.lastName}"
+                    android:id="@+id/edit_last_name"
+                    android:maxLines="1"
                     android:hint="@string/last_name"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -149,6 +159,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.phone}"
+                    android:maxLines="1"
+                    android:id="@+id/edit_phone"
+                    android:inputType="numberDecimal"
                     android:hint="@string/phone_number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -198,6 +211,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={state.zipCode}"
+                    android:id="@+id/edit_zip"
+                    android:maxLines="1"
                     android:hint="@string/zipcode"/>
 
             </com.google.android.material.textfield.TextInputLayout>

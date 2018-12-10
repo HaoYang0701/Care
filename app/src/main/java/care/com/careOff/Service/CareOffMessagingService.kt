@@ -11,6 +11,7 @@ import care.com.careOff.R
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import care.com.careOff.home.HomeActivity
+import care.com.careOff.shift.ShiftDetailsActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import io.reactivex.Observer
@@ -33,16 +34,17 @@ class CareOffMessagingService : FirebaseMessagingService() {
         remoteMessage
         if (remoteMessage?.data != null && remoteMessage?.data.isNotEmpty()) {
             Log.d("MESSAGE", "Message data payload: " + remoteMessage.data)
-            createPushNotification(remoteMessage.data.get("value"))
+            createPushNotification(remoteMessage.data.get("id"))
         }
 }
 
     private fun createPushNotification(string: String?) {
         val random = Random().nextInt()
-        val intent = Intent(applicationContext, HomeActivity::class.java)
-        intent.putExtra("screen", "debugScreen")
+        val intent = Intent(applicationContext, ShiftDetailsActivity::class.java)
+        intent.putExtra("shift_id", string?.toInt())
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
 
         var mBuilder = NotificationCompat.Builder(this, "default")
                 .setSmallIcon(R.drawable.logo_horizontal)

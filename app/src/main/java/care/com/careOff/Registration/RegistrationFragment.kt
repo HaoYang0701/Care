@@ -13,8 +13,41 @@ import care.com.careOff.home.HomeActivity
 import android.widget.Toast
 import care.com.careOff.login.LoginActivity
 import care.com.careOff.login.twoFactorAuth.TwoFactorActivity
+import org.joda.time.DateTime
 
 class RegistrationFragment : RegistrationContract.View, Fragment(){
+    override fun clearConfirmPasswordError() {
+        viewBinding.textInputLayoutConfirmPassword.isErrorEnabled = false
+    }
+
+    override fun clearPasswordError() {
+        viewBinding.textInputLayoutPassword.isErrorEnabled = false
+        viewBinding.textInputLayoutConfirmPassword.isErrorEnabled = false
+    }
+
+    override fun clearDobError() {
+        viewBinding.dobError.visibility = View.GONE
+    }
+
+    override fun clearPhoneNumberError() {
+        viewBinding.textInputLayoutPhone.isErrorEnabled = false
+    }
+
+    override fun clearZipCodeError() {
+        viewBinding.textInputLayoutZipCode.isErrorEnabled = false
+    }
+
+    override fun clearEmailError() {
+        viewBinding.textInputLayoutEmail.isErrorEnabled = false
+    }
+
+    override fun clearLastNameError() {
+        viewBinding.textInputLayoutLastName.isErrorEnabled = false
+    }
+
+    override fun clearFirstNameError() {
+        viewBinding.textInputLayoutFirstName.isErrorEnabled = false
+    }
 
     override fun goToLogin() {
         startActivity(Intent(context, LoginActivity::class.java))
@@ -91,6 +124,44 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
         viewBinding.presenter = this.presenter
         viewBinding.state = this.observable
         viewBinding.logInAction.setOnClickListener{v -> presenter.LoginActionClicked()}
+        viewBinding.datePicker.maxDate = DateTime().minusYears(18).millis
+
+        viewBinding.editFirstName.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidFirstName()
+            }
+        }
+
+        viewBinding.editLastName.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidLastName()
+            }
+        }
+
+        viewBinding.editEmail.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidEmail()
+            }
+        }
+        viewBinding.editZip.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidZip()
+            }
+        }
+
+        viewBinding.editConfirmPassword.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidPassword()
+            }
+        }
+
+        viewBinding.editPhone.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                presenter.checkValidPhone()
+            }
+        }
+
+
         return view
     }
 

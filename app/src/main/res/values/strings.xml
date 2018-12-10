@@ -28,7 +28,7 @@
     <string name="age">Age</string>
     <string name="date_of_birth">Date Of Birth</string>
     <string name="confirm_your_identity">Confirm your identity</string>
-    <string name="enter_code">Enter the code sent to your phone number ending in %s</string>
+    <string name="enter_code">Enter the code sent to your phone number</string>
     <string name="resend_verification_code">Resend verification code</string>
     <string name="verification_continue">Continue</string>
     <string name="social_security_number">Social Security Number</string>
@@ -45,4 +45,8 @@
 
     <string name="notification_channel_name">CareOff Notification</string>
     <string name="notification_channel_des">CareOff Notification Description</string>
+    <string name="availible">Available</string>
+    <string name="assigned">Assigned</string>
+    <string name="interested">Interested</string>
+    <string name="past">Past</string>
 </resources>

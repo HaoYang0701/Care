@@ -6,10 +6,11 @@ import care.com.careOff.base.BaseView
 interface LoginContract {
 
     interface View : BaseView<Presenter> {
-        fun goToOTPScreen()
+        fun goToHomeScreen()
         fun goToWelcomeScreen()
         fun goToForgotPasswordScreen()
         fun setObservable(observable: LoginObservable)
+        fun showLoginError()
     }
 
     interface Presenter : BasePresenter {

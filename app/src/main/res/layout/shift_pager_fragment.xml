@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_info"
+        android:layout_margin="30dp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_horizontal"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome, Hao"
+                android:id="@+id/username"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New York, New York"
+                android:id="@+id/userLocation"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shift_button_container"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/availible"
+            android:textColor="@color/primary_text"
+            android:textSize="10sp"
+            android:maxLines="1"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/blue"
+            android:id="@+id/availible"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/assigned"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:textColor="@color/primary_text"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/blue"
+            android:id="@+id/assigned"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/interested"
+            android:textSize="10sp"
+            android:maxLines="1"
+            app:strokeWidth="2dp"
+            android:textColor="@color/primary_text"
+            app:strokeColor="@color/blue"
+            android:id="@+id/interested"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/past"
+            app:strokeWidth="2dp"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:textColor="@color/primary_text"
+            app:strokeColor="@color/blue"
+            android:id="@+id/past"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

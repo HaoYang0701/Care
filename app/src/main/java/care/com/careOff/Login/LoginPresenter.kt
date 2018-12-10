@@ -50,14 +50,14 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
                         if (xID != null) {
                             sharedPref.update("x-id", xID)
                         }
-
-
                         updateFirebaseTokens()
+                    } else {
+                        loginView.showLoginError()
                     }
                 },
 
                 { error ->
-
+                    loginView.showLoginError()
                 })
     }
 
@@ -73,7 +73,7 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
 
             override fun onNext(t: PushTokenUpdateResponse) {
                 System.out.println("SUCCESS FIRE" + t.success)
-                loginView.goToOTPScreen()
+                loginView.goToHomeScreen()
             }
 
             override fun onSubscribe(d: Disposable) {

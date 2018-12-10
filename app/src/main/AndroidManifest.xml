@@ -41,8 +41,7 @@
 
         <activity android:name=".passwordreset.PasswordResetActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            >
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
 
         </activity>
 
@@ -64,7 +63,6 @@
 
         <activity
             android:name="care.com.careOff.home.HomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -80,6 +78,7 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity android:name="care.com.CareOffAppCompatActivity"/>
+        <activity android:name=".shift.ShiftDetailsActivity"/>
 
         <service android:name="care.com.careOff.Service.UserLocationService" />
         <service android:name="care.com.careOff.Service.CareOffMessagingService">

@@ -1,11 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<LinearLayout
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/map_image"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/fa_map"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/map_image"
+        android:id="@+id/shift_bar_container"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/fa_calendar"
+            android:tint="@color/blue"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:layout_marginRight="10dp"
+            android:text="Oct 19, 2018"
+            android:maxLines="1"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/fa_clock"
+            android:layout_marginRight="10dp"
+            android:tint="@color/blue"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:layout_marginRight="10dp"
+            android:text="6pm - 8pm"
+            android:maxLines="1"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/fa_map"
+            android:tint="@color/blue"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/distance"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:text="0.3 Miles Away"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/shift_bar_container">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/facility_name"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Facility Name"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/address"
+            android:text="285 Forest Hills Street"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/state"
+            android:text="Boston, MA 02130"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I've worked here before"/>
+    </LinearLayout>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/apply_button"
+        android:text="Apply"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/text_color"
+        android:layout_margin="20dp"/>
+</RelativeLayout>
 </layout>

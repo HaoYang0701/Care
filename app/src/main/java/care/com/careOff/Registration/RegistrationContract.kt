@@ -26,6 +26,23 @@ interface RegistrationContract {
 
         fun setConfirmPasswordError()
 
+
+        fun clearFirstNameError()
+
+        fun clearLastNameError()
+
+        fun clearEmailError()
+
+        fun clearZipCodeError()
+
+        fun clearPhoneNumberError()
+
+        fun clearDobError()
+
+        fun clearPasswordError()
+
+        fun clearConfirmPasswordError()
+
         fun setObservable(observable: RegistrationObservable)
 
         fun showToast(@StringRes stringRes: String)
@@ -36,5 +53,12 @@ interface RegistrationContract {
     interface Presenter : BasePresenter {
         fun registerButtonClicked()
         fun LoginActionClicked()
+
+        fun checkValidFirstName()
+        fun checkValidLastName()
+        fun checkValidZip()
+        fun checkValidPhone()
+        fun checkValidPassword()
+        fun checkValidEmail()
     }
 }

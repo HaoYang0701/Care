@@ -49,4 +49,9 @@ interface ApiEndpoint {
     @POST("it/shift/{id}")
     fun getShift(@Path("id") id : Int, @Header("x-access-token") accessToken : String,
                  @Header("x-id") xID : String) : Observable<GetShiftResponse>
+
+    @POST("/it/shift/worker?")
+    fun getListOfShifts(@Query("limit") limit : Int, @Query("offset") offset : Int,
+                        @Query("status") status : String, @Header("x-access-token") accessToken : String,
+                        @Header("x-id") xID : String) : Observable<AllShiftResponse>
 }

@@ -1,11 +1,7 @@
 package care.com.careOff.data.database.source
 
 import care.com.careOff.Model.*
-import care.com.careOff.Network.DocumentUploadUrlRequest
-import care.com.careOff.Network.LoginRequest
-import care.com.careOff.Network.PushTokenUpdateRequest
-import care.com.careOff.Network.RegistrationRequest
-import care.com.careOff.Network.VerifyOTPRequest
+import care.com.careOff.Network.*
 import care.com.careOff.data.database.source.local.LocalDataSource
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import io.reactivex.Flowable
@@ -13,7 +9,17 @@ import io.reactivex.Observable
 import retrofit2.Response
 
 class Repository(val remoteDataSource : RemoteDataSource, val localDataSource: LocalDataSource) : DataSource {
+    override fun applyShift(shiftInterestRequest: ShiftInterestRequest, accessToken: String, xID: String): Observable<ShiftInterestResponse> {
+        return Observable.empty()
+    }
 
+    override fun getShift(shiftID: Int, accessToken: String, xID: String): Observable<GetShiftResponse> {
+        return Observable.empty()
+    }
+
+    override fun getAllShifts(limit: Int, offset: Int, status: String, accessToken: String, xID: String): Observable<AllShiftResponse> {
+        return Observable.empty()
+    }
 
     override fun logIn(body: LoginRequest): Observable<Response<LoginResponse>> {
         return remoteDataSource.logIn(body)

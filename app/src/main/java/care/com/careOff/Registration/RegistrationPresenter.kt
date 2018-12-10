@@ -12,6 +12,57 @@ import java.io.IOException
 
 
 class RegistrationPresenter(val registrationView: RegistrationContract.View, val sharedPref: SharedPref, val geocoder: Geocoder) : RegistrationContract.Presenter{
+
+    override fun checkValidEmail(){
+        if (!observable.email.contains("@") || !observable.email.contains(".com")) {
+            registrationView.setEmailError()
+        } else {
+            registrationView.clearEmailError()
+        }
+    }
+
+    override fun checkValidPassword(){
+        if (observable.password.isBlank() || observable.password.length < 8) {
+            registrationView.setPasswordError()
+        } else if (!observable.confirmPassword.equals(observable.password)) {
+            registrationView.setConfirmPasswordError()
+        }else {
+            registrationView.clearPasswordError()
+        }
+    }
+
+    override fun checkValidPhone(){
+        if (observable.phone.length < 10) {
+            registrationView.setPhoneNumberError()
+        } else {
+            registrationView.clearPhoneNumberError()
+        }
+    }
+
+    override fun checkValidZip(){
+        if (observable.zipCode.length != 5) {
+            registrationView.setZipCodeError()
+        } else {
+            registrationView.clearZipCodeError()
+        }
+    }
+
+    override fun checkValidLastName(){
+        if (observable.lastName.isBlank()) {
+            registrationView.setLastNameError()
+        } else {
+            registrationView.clearLastNameError()
+        }
+    }
+
+    override fun checkValidFirstName(){
+        if (observable.firstName.isBlank()) {
+            registrationView.setFirstNameError()
+        } else {
+            registrationView.clearFirstNameError()
+        }
+    }
+
     var observable: RegistrationObservable
 
     init {
@@ -23,8 +74,6 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
     override fun LoginActionClicked() {
         registrationView.goToLogin()
     }
-
-
 
     @SuppressLint("CheckResult")
     override fun registerButtonClicked() {
@@ -41,10 +90,12 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
             registrationView.setConfirmPasswordError()
             return
         }
+        registrationView.clearConfirmPasswordError()
 
         if (!isInputValid(registrationRequest)) {
             return
         }
+
 
         val date = createDate(observable)
         if (date == null) {
@@ -79,7 +130,7 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
                             if (xID != null) {
                                 sharedPref.update("x-id", xID)
                             }
-                            registrationView.goToHomeScreen()
+                            registrationView.goToTwoFactor()
                         } } ,
                     { error ->
                         observable.showRegistrationError = true

@@ -22,6 +22,7 @@ class TwoFactorPresenter(val twoFactorView: TwoFactorContract.View, val sharedPr
     override fun verifyOTP(otpPin : String) {
         val otpRequest = VerifyOTPRequest()
         otpRequest.otp = otpPin
+        twoFactorView.goToHomeScreen()
         RemoteDataSource.verifyOTP(otpRequest, accessToken, xID).subscribe{
             twoFactorView.goToHomeScreen()
         }

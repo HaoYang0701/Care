@@ -1,8 +1,5 @@
 package care.com.careOff.data.database.source.remote
 
-import android.content.Context
-import android.os.Build
-import android.preference.PreferenceManager
 import care.com.careOff.Network.ApiEndpoint
 import care.com.careOff.Network.RegistrationRequest
 import care.com.careOff.data.database.source.DataSource
@@ -19,8 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
-import java.util.*
-import android.telephony.TelephonyManager
 import care.com.careOff.Model.*
 import care.com.careOff.Network.DocumentUploadUrlRequest
 import care.com.careOff.Network.LoginRequest
@@ -28,6 +23,19 @@ import care.com.careOff.Network.*
 
 
 object RemoteDataSource : DataSource {
+    override fun applyShift(shiftInterestRequest: ShiftInterestRequest, accessToken: String, xID: String): Observable<ShiftInterestResponse> {
+        return apiEndpoint.respondShiftInterest(shiftInterestRequest, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getShift(shiftID: Int, accessToken: String, xID: String): Observable<GetShiftResponse> {
+        return apiEndpoint.getShift(shiftID, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getAllShifts(limit: Int, offset: Int, status: String, accessToken: String, xID: String): Observable<AllShiftResponse> {
+        return apiEndpoint.getListOfShifts(limit, offset, status, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+
     override fun logIn(body: LoginRequest): Observable<Response<LoginResponse>> {
         return apiEndpoint.logIn(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
@@ -47,6 +55,7 @@ object RemoteDataSource : DataSource {
     override fun uploadImage(body : DocumentUploadUrlRequest) : Observable<DocumentUploadUrlResponse>{
         return apiEndpoint.getImageURL(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
+
 
 
     private var apiEndpoint: ApiEndpoint
