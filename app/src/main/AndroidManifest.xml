@@ -63,6 +63,7 @@
 
         <activity
             android:name="care.com.careOff.home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -78,7 +79,9 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity android:name="care.com.CareOffAppCompatActivity"/>
-        <activity android:name=".shift.ShiftDetailsActivity"/>
+        <activity android:name=".shift.ShiftDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="care.com.careOff.Service.UserLocationService" />
         <service android:name="care.com.careOff.Service.CareOffMessagingService">

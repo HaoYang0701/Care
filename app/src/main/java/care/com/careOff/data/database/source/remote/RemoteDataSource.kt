@@ -23,6 +23,10 @@ import care.com.careOff.Network.*
 
 
 object RemoteDataSource : DataSource {
+    override fun getUserDetails(accessToken: String, xID: String): Observable<UserDetailResponse> {
+        return apiEndpoint.getUserDetails(accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun applyShift(shiftInterestRequest: ShiftInterestRequest, accessToken: String, xID: String): Observable<ShiftInterestResponse> {
         return apiEndpoint.respondShiftInterest(shiftInterestRequest, accessToken, xID).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }

@@ -1,7 +1,7 @@
 package care.com.careOff.home.homepagefragments
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +10,26 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import care.com.careOff.R
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import care.com.careOff.Model.Shift
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.data.database.source.remote.RemoteDataSource
 import androidx.recyclerview.widget.DividerItemDecoration
+import care.com.careOff.Model.ShiftDetail
+import care.com.careOff.Model.ShiftStatus
+import care.com.careOff.Utils.DateUtil
 import care.com.careOff.shift.ShiftDetailsActivity
+import com.google.android.material.button.MaterialButton
 
 
 class ShiftsFragment : Fragment() {
     private var title: String? = null
     private var page: Int? = 0
     private lateinit var recycler : RecyclerView
-    private val shiftList = ArrayList<Shift>()
+    private val shiftList = ArrayList<ShiftDetail>()
     lateinit var shiftAdapter : ShiftAdapter
+    private lateinit var nameTextView : TextView
 
 
     companion object {
@@ -49,12 +54,13 @@ class ShiftsFragment : Fragment() {
         val view = inflater.inflate(R.layout.shift_pager_fragment, container, false)
         recycler = view.findViewById(R.id.recycler_view)
         shiftAdapter = ShiftAdapter(shiftList)
+        nameTextView = view.findViewById(R.id.username)
 
         shiftAdapter.setOnItemClickListener(object : ShiftAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val shift = shiftList[position]
                 val intent = Intent(context, ShiftDetailsActivity::class.java)
-                intent.putExtra("shift_id", shift.Id)
+                intent.putExtra("shift_id", shift.shift.Id)
                 startActivity(intent)
             }
         })
@@ -63,38 +69,113 @@ class ShiftsFragment : Fragment() {
         recycler.layoutManager = linearLayoutManager
         recycler.addItemDecoration(DividerItemDecoration(context,
                 linearLayoutManager.orientation))
+        setUpButtonListeners(view)
+
+        activity!!.findViewById<TextView>(R.id.toolbar_title).text = "Shifts"
         return view
     }
 
-    @SuppressLint("CheckResult")
-    override fun onStart() {
-        super.onStart()
+    private fun setUpButtonListeners(inflatedView: View) {
+        val availButton = inflatedView.findViewById<MaterialButton>(R.id.availible)
+        val assignedButton = inflatedView.findViewById<MaterialButton>(R.id.assigned)
+        val interestedButton = inflatedView.findViewById<MaterialButton>(R.id.interested)
+        val pastButton = inflatedView.findViewById<MaterialButton>(R.id.past)
+
         val sharedPref = SharedPref(context!!)
-//        val accessToken = sharedPref.fetch("x-access-token")
-//        val xID = sharedPref.fetch("x-id")
-//        RemoteDataSource.getAllShifts(10, 0, "NEW", accessToken, xID).subscribe(
-//                {
-//                    for (shiftDetail in it.shiftList) {
-//                        shiftList.add(shiftDetail.shift)
-//                    }
-//                },
-//                {System.out.println(it.localizedMessage)})
-        val shift1 = Shift(3,62, "2018-10-27T01:35:08.000Z", 480, 10,
-                "Looking someone friendly and nice", true, "","UNPAID"
-        ,"UNPAID", "NEW", "", "", "2018-11-28T02:52:22.000Z",
-                "2018-11-28T02:52:22.000Z")
+        val accessToken = "5ffa5cb70c09e6a0a2c21f1bba5211220c32e3e19a82571579cddda57fedb389"//sharedPref.fetch("x-access-token")
+        val xID = "46" //sharedPref.fetch("x-id")
 
-        val shift2 = Shift(4,61, "2018-10-27T01:35:08.000Z", 1180, 10,
-                "Looking someone friendly and nice", true, "","UNPAID"
-                ,"UNPAID", "NEW", "", "", "2018-11-28T02:52:22.000Z",
-                "2018-11-28T02:52:22.000Z")
+        availButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+        availButton.setTextColor(context!!.resources.getColor(R.color.accent))
 
-        shiftList.add(shift1)
-        shiftList.add(shift2)
+        availButton.setOnClickListener{v ->
+            clearAllButtons(availButton, assignedButton, interestedButton, pastButton)
+            availButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+            availButton.setTextColor(context!!.resources.getColor(R.color.accent))
+            loadShifts(accessToken, xID, ShiftStatus.NEW)
+        }
+
+        assignedButton.setOnClickListener{v ->
+            clearAllButtons(availButton, assignedButton, interestedButton, pastButton)
+            assignedButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+            assignedButton.setTextColor(context!!.resources.getColor(R.color.accent))
+            loadShifts(accessToken, xID, ShiftStatus.ASSIGNED)
+        }
+
+        interestedButton.setOnClickListener{v ->
+            clearAllButtons(availButton, assignedButton, interestedButton, pastButton)
+            interestedButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+            interestedButton.setTextColor(context!!.resources.getColor(R.color.accent))
+            loadShifts(accessToken, xID, ShiftStatus.INTERESTED)
+        }
+
+        pastButton.setOnClickListener{v ->
+            clearAllButtons(availButton, assignedButton, interestedButton, pastButton)
+            pastButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+            pastButton.setTextColor(context!!.resources.getColor(R.color.accent))
+            loadShifts(accessToken, xID, ShiftStatus.PAST)
+        }
+    }
+
+    private fun clearAllButtons(availButton: MaterialButton, assignedButton: MaterialButton, interestedButton: MaterialButton, pastButton: MaterialButton) {
+        availButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.accent))
+        availButton.setTextColor(context!!.resources.getColor(R.color.primary_text))
+
+        assignedButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.accent))
+        assignedButton.setTextColor(context!!.resources.getColor(R.color.primary_text))
+
+        interestedButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.accent))
+        interestedButton.setTextColor(context!!.resources.getColor(R.color.primary_text))
+
+        pastButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.accent))
+        pastButton.setTextColor(context!!.resources.getColor(R.color.primary_text))
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = SharedPref(context!!)
+        val accessToken = "5ffa5cb70c09e6a0a2c21f1bba5211220c32e3e19a82571579cddda57fedb389"//sharedPref.fetch("x-access-token")
+        val xID = "46" //sharedPref.fetch("x-id")
+        loadShifts(accessToken, xID, ShiftStatus.NEW)
+        loadUserDetails(accessToken, xID)
+    }
+
+    private fun loadUserDetails(accessToken: String, xID: String) {
+        RemoteDataSource.getUserDetails(accessToken, xID).subscribe(
+                {
+                    nameTextView.text = String.format(getString(R.string.welcome), it.userDetail.firstName)
+                }, {
+
+        }
+        )
+    }
+
+    private fun loadShifts(accessToken: String, xID: String, shiftStatus: ShiftStatus) {
+        clearData()
+        RemoteDataSource.getAllShifts(10, 0, shiftStatus.status, accessToken, xID).subscribe(
+                {
+                    val shiftListResponse = it.data.shiftDetailList
+                    for (shiftDetail in shiftListResponse.orEmpty()) {
+                        shiftList.add(shiftDetail)
+                    }
+                    shiftAdapter.notifyDataSetChanged()
+                },
+                { System.out.println(it.localizedMessage) })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        shiftList.clear()
         shiftAdapter.notifyDataSetChanged()
     }
 
-    class ShiftAdapter(val list : ArrayList<Shift>) : RecyclerView.Adapter<ShiftAdapter.ViewHolder>(){
+    fun clearData() {
+        shiftList.clear()
+        shiftAdapter.notifyDataSetChanged()
+    }
+
+    class ShiftAdapter(val list : ArrayList<ShiftDetail>) : RecyclerView.Adapter<ShiftAdapter.ViewHolder>(){
 
         var listener: OnItemClickListener? = null
 
@@ -108,9 +189,9 @@ class ShiftsFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val shift = list[position]
-            holder.dateTextView.text = shift.startDate
+            holder.dateTextView.text = DateUtil.getDate(shift.shift.startDate)
             holder.distanceTextView.text = ".3 Miles Away"
-            holder.timeTextView.text = "6pm - 8 pm"
+            holder.timeTextView.text = DateUtil.getTime(shift.shift.startDate, shift.shift.lengthInMins)
         }
 
         override fun getItemCount(): Int {
@@ -136,11 +217,7 @@ class ShiftsFragment : Fragment() {
                 timeTextView = itemView.findViewById(R.id.time)
                 distanceTextView = itemView.findViewById(R.id.distance)
                 linearLayout = itemView.findViewById(R.id.shift_item_container)
-                itemView.setOnClickListener(object : View.OnClickListener{
-                    override fun onClick(v: View?) {
-                        listener?.onItemClick(adapterPosition)
-                    }
-                })
+                itemView.setOnClickListener { listener?.onItemClick(adapterPosition) }
             }
 
         }

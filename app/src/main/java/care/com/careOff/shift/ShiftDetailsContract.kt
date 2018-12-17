@@ -10,6 +10,8 @@ class ShiftDetailsContract {
     }
 
     interface View : BaseView<Presenter> {
-
+        fun setDate(string : String)
+        fun setDistance(string : String)
+        fun setTime(string : String)
     }
 }

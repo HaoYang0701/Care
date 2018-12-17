@@ -6,29 +6,30 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/my_info"
-        android:layout_margin="30dp"
-        android:weightSum="2"
+        android:weightSum="3"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_horizontal"
+            android:src="@drawable/fa_user"
             android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome, Hao"
+                android:textColor="@color/primary_dark"
                 android:id="@+id/username"/>
 
             <TextView
@@ -38,13 +39,20 @@
                 android:id="@+id/userLocation"/>
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fa_lock"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/shift_button_container"
-        android:layout_margin="10dp"
+        android:layout_margin="18dp"
+        android:layout_marginBottom="12dp"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton

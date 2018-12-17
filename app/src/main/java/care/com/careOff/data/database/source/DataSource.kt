@@ -38,4 +38,6 @@ interface DataSource {
     fun getShift(shiftID : Int, accessToken : String, xID : String) : Observable<GetShiftResponse>
 
     fun applyShift(shiftInterestRequest: ShiftInterestRequest, accessToken : String, xID : String) : Observable<ShiftInterestResponse>
+
+    fun getUserDetails(ccessToken : String, xID : String) : Observable<UserDetailResponse>
 }

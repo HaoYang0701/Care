@@ -1,7 +1,9 @@
 package care.com.careOff.home
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import care.com.CareOffAppCompatActivity
@@ -27,6 +29,10 @@ class HomeActivity : CareOffAppCompatActivity(){
         val adapterViewPager = HomePagePagerAdapter(supportFragmentManager)
         viewPager.adapter = adapterViewPager
 
+        val myToolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(myToolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         viewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageSelected(position: Int) {
             }
@@ -40,14 +46,28 @@ class HomeActivity : CareOffAppCompatActivity(){
 
         val tabLayout = findViewById<TabLayout>(R.id.sliding_tabs) as TabLayout
         tabLayout.setupWithViewPager(viewPager)
-
+        tabLayout.setSelectedTabIndicator(R.color.text_color)
         setTabIcons(tabLayout)
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab : TabLayout.Tab?) {
+                tab?.getIcon()?.setColorFilter(resources.getColor(R.color.text_color), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabUnselected(tab : TabLayout.Tab?) {
+                tab?.getIcon()?.setColorFilter(resources.getColor(R.color.gray), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+        })
     }
 
     private fun setTabIcons(tabLayout: TabLayout) {
         for (i in 0 .. 4) {
             tabLayout.getTabAt(i)?.setIcon(tabImages[i])
         }
+        tabLayout.getTabAt(0)?.icon?.setColorFilter(resources.getColor(R.color.text_color), PorterDuff.Mode.SRC_IN)
     }
 
     override fun onNewIntent(intent: Intent?) {

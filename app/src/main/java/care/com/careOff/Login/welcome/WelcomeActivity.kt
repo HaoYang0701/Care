@@ -1,6 +1,7 @@
 package care.com.careOff.login.welcome
 
 import android.annotation.TargetApi
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +13,8 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import android.os.Build
 import care.com.CareOffAppCompatActivity
+import care.com.careOff.Utils.SharedPref
+import care.com.careOff.home.HomeActivity
 
 
 class WelcomeActivity : CareOffAppCompatActivity(){
@@ -22,6 +25,14 @@ class WelcomeActivity : CareOffAppCompatActivity(){
     @TargetApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPref = SharedPref(this)
+        val accessToken = sharedPref.fetch("x-access-token")
+        val xID = sharedPref.fetch("x-id")
+        if (!accessToken.isEmpty() && !xID.isEmpty()) {
+            goToHome()
+        }
+
         setContentView(R.layout.welcome_activity)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
@@ -48,6 +59,12 @@ class WelcomeActivity : CareOffAppCompatActivity(){
 
 //        val myService = Intent(this, UserLocationService::class.java)
 //        startForegroundService(myService)
+    }
+
+    private fun goToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     private fun checkPlayServices(): Boolean {

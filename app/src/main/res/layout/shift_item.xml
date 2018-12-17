@@ -4,65 +4,60 @@
     android:id="@+id/shift_item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="14dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/facility_name"
-        android:text="Facility Name"/>
+        android:text="Facility Name"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="7dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="16dp">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/fa_calendar"
-            android:tint="@color/blue"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:src="@drawable/fa_clock"
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/date"
-            android:layout_marginRight="10dp"
+            android:textColor="@color/primary_text"
             android:maxLines="1"
             android:layout_weight="1"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/fa_clock"
-            android:layout_marginRight="10dp"
-            android:tint="@color/blue"
-            android:layout_weight="1"/>
-
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/time"
-            android:layout_marginRight="10dp"
             android:maxLines="1"
-            android:layout_weight="1"/>
+            android:textColor="@color/secondary_text"
+            android:layout_marginRight="10dp"/>
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/fa_map"
-            android:tint="@color/blue"
             android:layout_marginRight="10dp"
             android:layout_weight="1"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/distance"
             android:maxLines="1"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"/>
+            android:textColor="@color/primary_text"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 </LinearLayout>

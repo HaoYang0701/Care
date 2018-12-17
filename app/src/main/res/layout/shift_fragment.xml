@@ -9,67 +9,56 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/map_image"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/fa_map"/>
+        android:layout_alignParentTop="true"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/map_image"
+        android:orientation="horizontal"
         android:id="@+id/shift_bar_container"
-        android:orientation="horizontal">
+        android:layout_marginLeft="16dp">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/fa_calendar"
-            android:tint="@color/blue"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:src="@drawable/fa_clock"
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/date"
-            android:layout_marginRight="10dp"
-            android:text="Oct 19, 2018"
+            android:textColor="@color/primary_text"
             android:maxLines="1"
             android:layout_weight="1"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/fa_clock"
-            android:layout_marginRight="10dp"
-            android:tint="@color/blue"
-            android:layout_weight="1"/>
-
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/time"
-            android:layout_marginRight="10dp"
-            android:text="6pm - 8pm"
             android:maxLines="1"
-            android:layout_weight="1"/>
+            android:textColor="@color/secondary_text"
+            android:layout_marginRight="10dp"/>
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/fa_map"
-            android:tint="@color/blue"
             android:layout_marginRight="10dp"
             android:layout_weight="1"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/distance"
             android:maxLines="1"
-            android:layout_marginRight="10dp"
-            android:text="0.3 Miles Away"
-            android:layout_weight="1"/>
+            android:textColor="@color/primary_text"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +72,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/facility_name"
             android:layout_marginTop="20dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
             android:layout_marginBottom="10dp"
             android:text="Facility Name"/>
 
@@ -99,6 +90,8 @@
             android:text="Boston, MA 02130"/>
 
         <CheckBox
+
+            android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="I've worked here before"/>
