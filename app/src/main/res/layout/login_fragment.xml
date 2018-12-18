@@ -85,23 +85,40 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/accent"
-            android:text="@string/log_in"
             android:layout_below="@+id/login_layout"
-            android:textColor="@color/text_color"/>
+            android:id="@+id/login_button_container">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/accent"
+                android:layout_centerInParent="true"
+                android:text="@string/log_in"
+                android:textColor="@color/text_color"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/accent"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login_button"
+            android:layout_below="@id/login_button_container"
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
             android:orientation="horizontal">

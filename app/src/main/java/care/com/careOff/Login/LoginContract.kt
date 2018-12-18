@@ -11,6 +11,8 @@ interface LoginContract {
         fun goToForgotPasswordScreen()
         fun setObservable(observable: LoginObservable)
         fun showLoginError()
+        fun showSpinner(boolean: Boolean)
+        fun showLoginButton(boolean: Boolean)
     }
 
     interface Presenter : BasePresenter {

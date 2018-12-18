@@ -1,10 +1,8 @@
 package care.com.careOff.login
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import care.com.CareOffAppCompatActivity
 import care.com.careOff.R
-import care.com.careOff.Utils.EventTracker
 import care.com.careOff.Utils.SharedPref
 import care.com.careOff.Utils.replaceFragmentInActivity
 

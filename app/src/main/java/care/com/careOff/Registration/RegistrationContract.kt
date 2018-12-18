@@ -26,6 +26,9 @@ interface RegistrationContract {
 
         fun setConfirmPasswordError()
 
+        fun showSpinner(shouldShowSpinner: Boolean)
+
+        fun showRegisterButton(shouldShowRegister: Boolean)
 
         fun clearFirstNameError()
 

@@ -38,6 +38,8 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
         val loginRequest = LoginRequest()
         loginRequest.phone = loginObservable.phone
         loginRequest.password = loginObservable.password
+        loginView.showLoginButton(false)
+        loginView.showSpinner(true)
 
         RemoteDataSource.logIn(loginRequest).subscribe(
                 { response ->
@@ -52,11 +54,15 @@ class LoginPresenter(val loginView: LoginContract.View, val sharedPref: SharedPr
                         }
                         updateFirebaseTokens()
                     } else {
+                        loginView.showLoginButton(true)
+                        loginView.showSpinner(false)
                         loginView.showLoginError()
                     }
                 },
 
                 { error ->
+                    loginView.showLoginButton(true)
+                    loginView.showSpinner(false)
                     loginView.showLoginError()
                 })
     }

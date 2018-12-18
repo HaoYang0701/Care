@@ -175,6 +175,22 @@ class RegistrationFragment : RegistrationContract.View, Fragment(){
         presenter.unsubscribe()
     }
 
+    override fun showRegisterButton(shouldShowLogin: Boolean) {
+        if (shouldShowLogin) {
+            viewBinding.registerButton.visibility = View.VISIBLE
+        } else {
+            viewBinding.registerButton.visibility = View.GONE
+        }
+    }
+
+    override fun showSpinner(shouldShowSpinner: Boolean) {
+        if (shouldShowSpinner) {
+            viewBinding.progressBar.visibility = View.VISIBLE
+        } else {
+            viewBinding.progressBar.visibility = View.GONE
+        }
+    }
+
     companion object {
         fun newInstance() : RegistrationFragment{
             return RegistrationFragment()

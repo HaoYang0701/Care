@@ -11,11 +11,25 @@ import care.com.careOff.login.welcome.WelcomeActivity
 import care.com.careOff.R
 import care.com.careOff.databinding.LoginFragmentBinding
 import care.com.careOff.home.HomeActivity
-import care.com.careOff.login.twoFactorAuth.TwoFactorActivity
 import care.com.careOff.passwordreset.PasswordResetActivity
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : LoginContract.View, Fragment() {
+    override fun showLoginButton(shouldShowLogin: Boolean) {
+        if (shouldShowLogin) {
+            viewBinding.loginButton.visibility = View.VISIBLE
+        } else {
+            viewBinding.loginButton.visibility = View.GONE
+        }
+    }
+
+    override fun showSpinner(shouldShowSpinner: Boolean) {
+        if (shouldShowSpinner) {
+            viewBinding.progressBar.visibility = View.VISIBLE
+        } else {
+            viewBinding.progressBar.visibility = View.GONE
+        }
+    }
 
     override fun showLoginError() {
         val snackbar = Snackbar.make(activity!!.findViewById(R.id.login_container),
@@ -28,7 +42,7 @@ class LoginFragment : LoginContract.View, Fragment() {
     }
 
     override fun goToWelcomeScreen() {
-        startActivity(Intent(context, WelcomeActivity::class.java))
+        activity?.finish()
     }
 
     private lateinit var presenter: LoginContract.Presenter
@@ -40,6 +54,7 @@ class LoginFragment : LoginContract.View, Fragment() {
         val view = viewBinding.root
         viewBinding.state = this.observable
         setUpClickListeners()
+        viewBinding.progressBar.indeterminateDrawable.setColorFilter(resources.getColor(R.color.accent), android.graphics.PorterDuff.Mode.MULTIPLY)
         return view
     }
 

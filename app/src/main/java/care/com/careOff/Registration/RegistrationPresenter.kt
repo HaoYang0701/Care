@@ -117,6 +117,9 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
             // handle exception
         }
 
+        registrationView.showRegisterButton(false)
+        registrationView.showSpinner(true)
+
 
 
         RemoteDataSource.registerNewUser(registrationRequest).subscribe(
@@ -135,6 +138,8 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
                     { error ->
                         observable.showRegistrationError = true
                         registrationView.showToast(error.localizedMessage)
+                        registrationView.showRegisterButton(true)
+                        registrationView.showSpinner(false)
                     })
     }
 
@@ -142,10 +147,6 @@ class RegistrationPresenter(val registrationView: RegistrationContract.View, val
         val day = observable.dayOfBirth
         val month = observable.monthOfBirth
         val year = observable.yearOfBirth
-
-        if (day == 0 || month == 0 || year == 0) {
-            return null
-        }
 
         val start = LocalDate.of( year , month + 1 , day ) ;
         val stop = LocalDate.now( ZoneId.of( "America/Montreal" ) );

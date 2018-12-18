@@ -10,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:isScrollContainer="true">
 
     <LinearLayout android:orientation="vertical"
                   android:layout_width="match_parent"
@@ -48,6 +49,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutEmail"
                 android:layout_gravity="center">
 
@@ -69,6 +71,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutPassword"
                 android:layout_gravity="center">
 
@@ -90,6 +93,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutConfirmPassword"
                 android:layout_gravity="center">
 
@@ -111,6 +115,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutFirstName"
                 android:layout_gravity="center">
 
@@ -131,6 +136,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutLastName"
                 android:layout_gravity="center">
 
@@ -152,6 +158,7 @@
                 android:layout_marginEnd="40dp"
                 app:errorEnabled="true"
                 android:layout_marginBottom="20dp"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutPhone"
                 android:layout_gravity="center">
 
@@ -174,7 +181,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 app:errorEnabled="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/date_of_birth"/>
 
             <TextView
@@ -204,6 +211,7 @@
                 android:layout_marginEnd="40dp"
                 app:errorEnabled="true"
                 android:layout_marginBottom="10dp"
+                app:errorTextAppearance="@style/error_appearance"
                 android:id="@+id/textInputLayoutZipCode"
                 android:layout_gravity="center">
 
@@ -222,17 +230,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
-                android:textColor="@color/error"
+                android:textColor="@color/accent"
                 android:gravity="center"
                 android:visibility="@{state.showRegistrationError ? View.VISIBLE : View.GONE}"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:text="There was an issue with your registration. Please check your information and try again"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login_layout"
+                android:id="@+id/login_button_container">
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_gravity="center"
@@ -241,6 +256,15 @@
                 android:backgroundTint="@color/accent"
                 android:onClick="@{() -> presenter.registerButtonClicked()}"
                 android:text="@string/sign_up"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
